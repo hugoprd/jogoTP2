@@ -66,6 +66,13 @@ public class PersonagemJogavel implements Personagem{
     }
 
     public void adicionarItem(Item itemX){
-        System.out.println("");
+        try{
+            if(itemX != null){
+                inventario.add(itemX);
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

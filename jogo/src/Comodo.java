@@ -26,7 +26,7 @@ public class Comodo implements Obstaculo{
         return false;
     }
 
-    public ArrayList<Item> getArrayList(){
+    public ArrayList<Item> getItens(){
         return itens;
     }
 

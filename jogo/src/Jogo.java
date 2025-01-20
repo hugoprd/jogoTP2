@@ -10,12 +10,12 @@ public class Jogo extends JFrame{
     private static JTextArea textoArea;
     private static int delay = 50;
 
-    private static JPanel jogo = new JPanel(new BorderLayout());
+    //private static JPanel jogo = new JPanel(new BorderLayout());
 
     private static final File somPadrao = new File("lib/textoPadrao.wav");
 
-    public static CardLayout cardLayout = new CardLayout();
-    public static JPanel cardPanel = new JPanel(cardLayout);
+    //public static CardLayout cardLayout = new CardLayout();
+    //public static JPanel cardPanel = new JPanel(cardLayout);
 
     //public static JButton botaoProximo = new JButton("PROXIMO");
 

@@ -10,6 +10,14 @@ public class Autoestima implements Obstaculo{
         this.caminhoImagem = caminhoImagem;
     }
 
+    public int getVida(){
+        return vida;
+    }
+
+    public int getDano(){
+        return dano;
+    }
+
     public String getCaminhoImagem(){
         return caminhoImagem;
     }

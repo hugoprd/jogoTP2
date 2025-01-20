@@ -40,7 +40,7 @@ public class AlternarPaineis extends JFrame{
         //add(Frame.cardPanel, BorderLayout.CENTER);
         //add(btnAlternar, BorderLayout.SOUTH);
 
-        Jogo.cardLayout.show(Jogo.cardPanel, PAINEIS.keySet().iterator().next());
+        //Jogo.cardLayout.show(Jogo.cardPanel, PAINEIS.keySet().iterator().next());
     }
 
     public String getNome(){

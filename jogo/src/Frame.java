@@ -56,7 +56,7 @@ public class Frame extends JFrame{
 
     public static Font font = new Font("Courier New", Font.PLAIN, 18);
 
-    public static File soundEffect = new File("lib/8bitSoundEffect.wav");
+    public static File soundEffect = new File("jogo/lib/8bitSoundEffect.wav");
 
     // ============== PAINEIS PRINCIPAIS ==============
     public static JPanel menu;
@@ -93,8 +93,8 @@ public class Frame extends JFrame{
         jf.setLayout(new FlowLayout());
         setDefaultFont(font);
 
-        File musica8bit1 = new File("lib/8bitmusic.wav");
-        File musicaJogo = new File("lib/gameMusic.wav");
+        File musica8bit1 = new File("jogo/lib/8bitmusic.wav");
+        File musicaJogo = new File("jogo/lib/gameMusic.wav");
 
         jf.setLayout(new BorderLayout());
         Border whiteline = BorderFactory.createLineBorder(Color.white);
@@ -509,7 +509,7 @@ public class Frame extends JFrame{
         });
 
         botaoProximo.addActionListener(e -> {
-            alternarPainel(cardLayout, cardPanel);
+            //alternarPainel(cardLayout, cardPanel);
 
             tocarSoundEffect(soundEffect, true);
         });
@@ -541,7 +541,7 @@ public class Frame extends JFrame{
         painel.add(buttonPanel, BorderLayout.SOUTH); // Adiciona o painel com o botão na parte inferior
     }
 
-    public static void alternarPainel(CardLayout cardLayout, JPanel cardPanel){
+    /*public static void alternarPainel(CardLayout cardLayout, JPanel cardPanel){
         int painelAtual = 0;
 
         configurarBotao(botaoProximo);
@@ -581,7 +581,7 @@ public class Frame extends JFrame{
         painelAtual = (painelAtual + 1) % PAINEIS.size();
 
         cardLayout.show(cardPanel, chaves[painelAtual]);
-    }
+    }*/
 
     public static void tocarVoz(File arquivo, boolean tocar){
         try{
@@ -656,6 +656,10 @@ public class Frame extends JFrame{
                 System.out.println("musica parou");
             }  
         }catch(Exception e){
+            UIManager.put("OptionPane.messageFont", new Font("Courier New", Font.PLAIN, 14));
+            UIManager.put("OptionPane.buttonFont", new Font("Courier New", Font.PLAIN, 14));
+            JOptionPane.showMessageDialog(null, "Erro ao tocar música: " + e.getMessage());
+
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao tocar música: " + e.getMessage());
         }

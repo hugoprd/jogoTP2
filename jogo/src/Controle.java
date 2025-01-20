@@ -23,7 +23,7 @@ public class Controle extends JFrame{
         aumentarVolume.setBackground(Color.black);
         aumentarVolume.setOpaque(true);
         aumentarVolume.addActionListener(e -> {
-            alterarVolume(2.0f);
+            alterarVolume(2f);
             Frame.tocarSoundEffect(Frame.soundEffect, true);
         }); // multiplica o volume por 2
         Frame.configurarBotao(aumentarVolume);
@@ -35,7 +35,7 @@ public class Controle extends JFrame{
         diminuirVolume.setBackground(Color.black);
         diminuirVolume.setOpaque(true);
         diminuirVolume.addActionListener(e -> {
-            alterarVolume(0.5f);
+            alterarVolume(0.75f);
             Frame.tocarSoundEffect(Frame.soundEffect, true);
         }); // reduz o volume pela metade
         Frame.configurarBotao(diminuirVolume);

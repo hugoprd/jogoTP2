@@ -52,6 +52,6 @@ public class Item{
     }
 
     public void exibirInformacoes(){
-        System.out.println("");
+        System.out.printf("%s recupera %d de energia", this.nome, this.recEnergia);
     }
 }
