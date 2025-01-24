@@ -17,29 +17,29 @@ public class PainelJogo extends JPanel implements Runnable{
 
     Dimension screenSize = toolkit.getScreenSize();
 
-    final int maxScreenCol = 3; // 3 colunas
-    final int maxScreenRow = 3; // 3 linhas
+    public final int originalTileSize = 128;
+    public final int scale = 4;
+    public final int tileSize = originalTileSize * scale;
 
-    final int screenWidth = screenSize.width; // largura da tela baseada na tela do usuário
-    final int screenHeight = screenSize.height; // altura da tela baseada na tela do usuário
+    public final int maxScreenCol = 3; // 3 colunas
+    public final int maxScreenRow = 3; // 3 linhas
+
+    public final int screenWidth = screenSize.width; // largura da tela baseada na tela do usuário
+    public final int screenHeight = screenSize.height; // altura da tela baseada na tela do usuário
 
     Thread gameThread;
 
     KeyHandler kh = new KeyHandler();
 
-    final int FPS = 1;
+    final int FPS = 60;
 
     // =============== JOGADOR ===============
     Jogador jogador = new Jogador(this, kh);
 
     // =============== COMODO ===============
-    Comodo apartamento = new Comodo("apartamento", "lib/apartamento/cenaApartamento1.png", "lib/apartamento/cenaApartamento2.png");
+    Comodo apartamento = new Comodo("apartamento", "/lib/apartamento/cenaApartamento1.png", "/lib/apartamento/cenaApartamento2.png", this);
 
     // =============== DEFINIÇÃO PADRÃO PARA AS IMAGENS DO CENTRO ===============
-    int imagemX = 100;
-    int imagemY = 100;
-    // para teste apenas:
-    int imagemVel = 4;
 
     public PainelJogo(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -57,7 +57,7 @@ public class PainelJogo extends JPanel implements Runnable{
     @Override
     public void run(){
         //long tempoAtual = System.nanoTime(); // 1000000000 (1 bilhão) de nano segundos = 1 segundo
-        double intervaloD = 1000000000/FPS; // 1 milissegundo dividido pelo FPS (1) ->
+        double intervaloD = 1000000000/FPS; // 1 milissegundo dividido pelo FPS (60) ->
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
@@ -91,7 +91,7 @@ public class PainelJogo extends JPanel implements Runnable{
     // ===============----------=============== MÉTODOS PARA ATUALIZAÇÃO ===============----------===============
     public void update(){
         apartamento.update();
-        jogador.update();
+        //jogador.update();
     }
 
     public void paintComponent(Graphics g){
@@ -99,9 +99,7 @@ public class PainelJogo extends JPanel implements Runnable{
 
         Graphics2D g2 = (Graphics2D)g;
 
-        g2.setColor(Color.white);
-
-        g2.fillRect(imagemX, imagemY, 48, 48);
+        apartamento.draw(g2);
 
         g2.dispose();
     }

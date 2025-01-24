@@ -1,8 +1,14 @@
 package entidade;
 
+import main.PainelJogo;
+import main.App;
+
+import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -12,17 +18,35 @@ public class Comodo implements Obstaculo{
     protected String caminhoImagem1;
     protected String caminhoImagem2;
     protected ArrayList<Item> itens = new ArrayList<>();
+
+    PainelJogo pj;
     
     public BufferedImage img1, img2;
 
     public int spriteCont = 0;
     public int spriteNum = 1;
 
-    public Comodo(String nome, String caminhoImagem1, String caminhoImagem2){
+    Toolkit toolkit = Toolkit.getDefaultToolkit();
+
+    Dimension screenSize = toolkit.getScreenSize();
+
+    int x = 500;
+    int y = 0;
+
+    public Comodo(String nome, String caminhoImagem1, String caminhoImagem2, PainelJogo pj){
+        this.pj = pj;
+
         setNome(nome);
         setCaminhoImagem1(caminhoImagem1);
         setCaminhoImagem2(caminhoImagem2);
         setImagens(getCaminhoImagem1(), getCaminhoImagem2());
+        setValoresPadrao();
+        getImagem();
+    }
+
+    public void setValoresPadrao(){
+        this.x = 500;
+        this.y = 0;
     }
 
     public String getNome(){
@@ -67,19 +91,31 @@ public class Comodo implements Obstaculo{
         return false;
     }
 
+    public void getImagem(){
+        try{
+            System.out.println("carregando as imagens");
+            img1 = ImageIO.read(getClass().getResourceAsStream(getCaminhoImagem1()));
+            img2 = ImageIO.read(getClass().getResourceAsStream(getCaminhoImagem2()));
+            System.out.println("imagens carregadas");
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
     public void setImagens(String caminhoImagem1, String caminhoImagem2){
         try{
             img1 = ImageIO.read(getClass().getResourceAsStream(caminhoImagem1));
             img2 = ImageIO.read(getClass().getResourceAsStream(caminhoImagem2));
         }
         catch(Exception e){
-            e.setStackTrace(null);
+            //e.setStackTrace(null);
         }
     }
 
     public void update(){
         spriteCont++;
-        if(spriteCont > 10){
+        if(spriteCont > 12){
             if(spriteNum == 1){
                 spriteNum = 2;
             }
@@ -91,7 +127,9 @@ public class Comodo implements Obstaculo{
     }
 
     public void draw(Graphics2D g2){
-        BufferedImage imagem = null;
+        BufferedImage imagem = img1;
+
+        g2.drawImage(imagem, x, y, pj.tileSize, pj.tileSize, null);
     }
 
     @Override
