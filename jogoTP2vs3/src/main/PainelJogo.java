@@ -6,14 +6,16 @@ import java.awt.*;
 public class PainelJogo {
     JFrame jf;
     Container con;
-    JPanel painelTitulo, painelBotaoStart, painelTextoPadrao, painelBotaoConfig, painelBotaoPontuacoes;
+    JPanel painelTitulo, painelBotaoStart, painelTextoPadrao, painelBotaoConfig, painelBotaoPontuacoes, painelBotaoProximoInGame,
+            painelBotaoVoltarConfig, painelBotaoVoltarPontuacoes, painelBotaoVoltarIniciar;
     JLabel tituloJogo;
     Font fonteTitulo = new Font("Courier New", Font.BOLD, 32);
     Font fontePadrao = new Font("Courier New", Font.PLAIN, 18);
-    JButton botaoStart, botaoConfig, botaoPontuacoes;
+    JButton botaoStart, botaoConfig, botaoPontuacoes, botaoProximoInGame;
     JTextArea areaTextoPadrao;
 
     TitleScreenHandler tsh = new TitleScreenHandler(this);
+    ConfigHandler ch = new ConfigHandler(this);
 
     ControleMusicaTI cmti = new ControleMusicaTI(this);
 
@@ -48,7 +50,7 @@ public class PainelJogo {
 
         // BOTAO INICIAR
         painelBotaoStart = new JPanel();
-        painelBotaoStart.setBounds(650, 500, 200, 100);
+        painelBotaoStart.setBounds(650, 500, 200, 50);
         painelBotaoStart.setBackground(Color.black);
 
         botaoStart = new JButton("INICIAR");
@@ -59,23 +61,34 @@ public class PainelJogo {
 
         // BOTAO CONFIGURACOES
         painelBotaoConfig = new JPanel();
-        painelBotaoConfig.setBounds(550, 600, 200, 100);
+        painelBotaoConfig.setBounds(550, 600, 200, 50);
         painelBotaoConfig.setBackground(Color.black);
 
-        botaoConfig = new JButton();
+        botaoConfig = new JButton("CONFIGURAÇÕES");
         configurarBotao(botaoConfig);
-        botaoConfig.addActionListener(tsh);
+        botaoConfig.addActionListener(ch);
 
         painelBotaoConfig.add(botaoConfig);
 
         // BOTAO PONTUACOES
         painelBotaoPontuacoes = new JPanel();
-        painelBotaoPontuacoes.setBounds(750, 600, 200, 100);
+        painelBotaoPontuacoes.setBounds(750, 600, 200, 50);
         painelBotaoPontuacoes.setBackground(Color.black);
 
-        botaoPontuacoes = new JButton();
+        botaoPontuacoes = new JButton("PONTUAÇÕES");
         configurarBotao(botaoPontuacoes);
         botaoPontuacoes.addActionListener(tsh);
+
+        painelBotaoPontuacoes.add(botaoPontuacoes);
+
+        // BOTAO PROXIMO IN-GAME
+        painelBotaoProximoInGame = new JPanel();
+        painelBotaoProximoInGame.setBounds(650, 500, 200, 50);
+        painelBotaoProximoInGame.setBackground(Color.yellow);
+
+        botaoProximoInGame = new JButton(">");
+        configurarBotao(botaoProximoInGame);
+        botaoProximoInGame.addActionListener(tsh);
 
         painelTitulo.add(tituloJogo);
 
@@ -83,6 +96,7 @@ public class PainelJogo {
         con.add(painelBotaoStart);
         con.add(painelBotaoConfig);
         con.add(painelBotaoPontuacoes);
+        con.add(painelBotaoProximoInGame);
 
         jf.setVisible(true);
     }
@@ -94,12 +108,12 @@ public class PainelJogo {
         painelBotaoPontuacoes.setVisible(false);
 
         painelTextoPadrao = new JPanel();
-        painelTextoPadrao.setBounds(400, 0, 400, 600);
+        painelTextoPadrao.setBounds(0, (alturaTJ - 300), larguraTJ, 400);
         painelTextoPadrao.setBackground(Color.gray);
 
-        areaTextoPadrao = new JTextArea();
-        areaTextoPadrao.setBounds(400, 0, 400, 600);
-        areaTextoPadrao.setBackground(Color.black);
+        areaTextoPadrao = new JTextArea("olá teste");
+        areaTextoPadrao.setBounds(0, (alturaTJ - 300), larguraTJ, 400);
+        areaTextoPadrao.setBackground(Color.gray);
         areaTextoPadrao.setForeground(Color.white);
         areaTextoPadrao.setFont(fontePadrao);
         areaTextoPadrao.setLineWrap(true); //texto vai pra baixo automaticamente
@@ -107,6 +121,13 @@ public class PainelJogo {
         painelTextoPadrao.add(areaTextoPadrao);
 
         con.add(painelTextoPadrao);
+    }
+
+    public void abrirConfigs(){
+        painelTitulo.setVisible(false);
+        painelBotaoStart.setVisible(false);
+        painelBotaoConfig.setVisible(false);
+        painelBotaoPontuacoes.setVisible(false);
     }
 
     public void configurarBotao(JButton botao){

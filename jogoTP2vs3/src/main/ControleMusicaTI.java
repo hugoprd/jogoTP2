@@ -19,7 +19,7 @@ public class ControleMusicaTI{
 
     public void tocarMusica(){
         try{
-            File arquivo = new File("/lib/sounds/musics/8bitmusicTelaInicial.wav");
+            File arquivo = new File("src/lib/sounds/musics/8bitmusicTelaInicial.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(arquivo);
             clip = AudioSystem.getClip();
             clip.open(audioStream);
