@@ -6,11 +6,11 @@ import java.awt.*;
 public class PainelJogo {
     JFrame jf;
     Container con;
-    JPanel painelTitulo, painelBotaoStart, painelTextoPadrao;
+    JPanel painelTitulo, painelBotaoStart, painelTextoPadrao, painelBotaoConfig, painelBotaoPontuacoes;
     JLabel tituloJogo;
     Font fonteTitulo = new Font("Courier New", Font.BOLD, 32);
     Font fontePadrao = new Font("Courier New", Font.PLAIN, 18);
-    JButton botaoStart;
+    JButton botaoStart, botaoConfig, botaoPontuacoes;
     JTextArea areaTextoPadrao;
 
     TitleScreenHandler tsh = new TitleScreenHandler(this);
@@ -46,6 +46,7 @@ public class PainelJogo {
         tituloJogo.setForeground(Color.white);
         tituloJogo.setFont(fonteTitulo);
 
+        // BOTAO INICIAR
         painelBotaoStart = new JPanel();
         painelBotaoStart.setBounds(650, 500, 200, 100);
         painelBotaoStart.setBackground(Color.black);
@@ -56,10 +57,32 @@ public class PainelJogo {
 
         painelBotaoStart.add(botaoStart);
 
+        // BOTAO CONFIGURACOES
+        painelBotaoConfig = new JPanel();
+        painelBotaoConfig.setBounds(550, 600, 200, 100);
+        painelBotaoConfig.setBackground(Color.black);
+
+        botaoConfig = new JButton();
+        configurarBotao(botaoConfig);
+        botaoConfig.addActionListener(tsh);
+
+        painelBotaoConfig.add(botaoConfig);
+
+        // BOTAO PONTUACOES
+        painelBotaoPontuacoes = new JPanel();
+        painelBotaoPontuacoes.setBounds(750, 600, 200, 100);
+        painelBotaoPontuacoes.setBackground(Color.black);
+
+        botaoPontuacoes = new JButton();
+        configurarBotao(botaoPontuacoes);
+        botaoPontuacoes.addActionListener(tsh);
+
         painelTitulo.add(tituloJogo);
 
         con.add(painelTitulo);
         con.add(painelBotaoStart);
+        con.add(painelBotaoConfig);
+        con.add(painelBotaoPontuacoes);
 
         jf.setVisible(true);
     }
@@ -67,6 +90,8 @@ public class PainelJogo {
     public void criarTelaJogo(){
         painelTitulo.setVisible(false);
         painelBotaoStart.setVisible(false);
+        painelBotaoConfig.setVisible(false);
+        painelBotaoPontuacoes.setVisible(false);
 
         painelTextoPadrao = new JPanel();
         painelTextoPadrao.setBounds(400, 0, 400, 600);
