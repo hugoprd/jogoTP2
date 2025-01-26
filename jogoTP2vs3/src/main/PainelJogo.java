@@ -9,13 +9,18 @@ public class PainelJogo {
     JFrame jf;
     Container con;
 
-    JPanel painelTitulo, painelBotaoStart, painelTextoPadrao, painelBotaoConfig, painelBotaoPontuacoes;
+    JPanel painelTitulo, painelBotaoStart, painelBotaoConfig, painelBotaoPontuacoes;
+    JPanel painelTextoPadrao;
+    JPanel painelImagemApartamento, painelImagemSala, painelImagemCozinha, painelImagemQuarto, painelImagemBanheiro;
+    JPanel painelImagemAutoestima, painelImagemChefe;
     JPanel painelBotaoProximoInGame;
     JPanel painelBotaoVoltarConfig, painelBotaoVoltarPontuacoes, painelBotaoVoltarIniciar;
     JPanel painelBotaoPersonagemKalrok, painelBotaoPersonagemLohan;
     JPanel painelBotaoAumentarVol, painelBotaoDiminuirVol;
 
     JLabel tituloJogo;
+
+    JTextArea areaTextoPadrao;
 
     Font fonteTitulo = new Font("Courier New", Font.BOLD, 32);
     Font fontePadrao = new Font("Courier New", Font.PLAIN, 18);
@@ -26,9 +31,10 @@ public class PainelJogo {
     JButton botaoPersonagemKalrok, botaoPersonagemLohan;
     JButton botaoAumentarVol, botaoDiminuirVol;
 
-    JTextArea areaTextoPadrao;
-
+    // menu
     TitleScreenHandler tsh = new TitleScreenHandler(this);
+    TitleScreenHandlerB tshb = new TitleScreenHandlerB(this);
+    // misc
     ConfigHandler ch = new ConfigHandler(this);
     // start handler: kalrok || lohan
     StartHandlerK shk = new StartHandlerK(this);
@@ -118,7 +124,7 @@ public class PainelJogo {
         // BOTAO PROXIMO IN-GAME
         painelBotaoProximoInGame = new JPanel();
         painelBotaoProximoInGame.setBounds(650, 500, 200, 50);
-        painelBotaoProximoInGame.setBackground(Color.yellow);
+        painelBotaoProximoInGame.setBackground(Color.black);
 
         botaoProximoInGame = new JButton(">");
         configurarBotao(botaoProximoInGame);
@@ -130,12 +136,12 @@ public class PainelJogo {
 
         // BOTAO VOLTAR DA CONFIGURACAO
         painelBotaoVoltarConfig = new JPanel();
-        painelBotaoVoltarConfig.setBounds(650, 500, 200, 50);
-        painelBotaoVoltarConfig.setBackground(Color.yellow);
+        painelBotaoVoltarConfig.setBounds(650, 700, 200, 50);
+        painelBotaoVoltarConfig.setBackground(Color.black);
 
         botaoVoltarConfig = new JButton("MENU");
         configurarBotao(botaoVoltarConfig);
-        botaoVoltarConfig.addActionListener(tsh);
+        botaoVoltarConfig.addActionListener(tshb);
 
         painelBotaoVoltarConfig.add(botaoVoltarConfig);
 
@@ -143,12 +149,12 @@ public class PainelJogo {
 
         // BOTAO VOLTAR DA PONTUACAO
         painelBotaoVoltarPontuacoes = new JPanel();
-        painelBotaoVoltarPontuacoes.setBounds(650, 500, 200, 50);
-        painelBotaoVoltarPontuacoes.setBackground(Color.yellow);
+        painelBotaoVoltarPontuacoes.setBounds(650, 700, 200, 50);
+        painelBotaoVoltarPontuacoes.setBackground(Color.black);
 
         botaoVoltarPontuacoes = new JButton("MENU");
         configurarBotao(botaoVoltarPontuacoes);
-        botaoVoltarPontuacoes.addActionListener(tsh);
+        botaoVoltarPontuacoes.addActionListener(tshb);
 
         painelBotaoVoltarPontuacoes.add(botaoVoltarPontuacoes);
 
@@ -156,21 +162,47 @@ public class PainelJogo {
 
         // BOTAO VOLTAR DO INICIAR
         painelBotaoVoltarIniciar = new JPanel();
-        painelBotaoVoltarIniciar.setBounds(650, 500, 200, 50);
-        painelBotaoVoltarIniciar.setBackground(Color.yellow);
+        painelBotaoVoltarIniciar.setBounds(650, 700, 200, 50);
+        painelBotaoVoltarIniciar.setBackground(Color.black);
 
         botaoVoltarIniciar = new JButton("MENU");
         configurarBotao(botaoVoltarIniciar);
-        botaoVoltarIniciar.addActionListener(tsh);
+        botaoVoltarIniciar.addActionListener(tshb);
 
         painelBotaoVoltarIniciar.add(botaoVoltarIniciar);
 
         painelBotaoVoltarIniciar.setVisible(false);
 
+        // BOTAO AUMENTAR VOLUME
+        painelBotaoAumentarVol = new JPanel();
+        painelBotaoAumentarVol.setBounds(500, 450, 250, 50);
+        painelBotaoAumentarVol.setBackground(Color.black);
+
+        botaoAumentarVol = new JButton("AUMENTAR VOLUME");
+        configurarBotao(botaoAumentarVol);
+        botaoAumentarVol.addActionListener(vhu);
+
+        painelBotaoAumentarVol.add(botaoAumentarVol);
+
+        painelBotaoAumentarVol.setVisible(false);
+
+        // BOTAO DIMINUIR VOLUME
+        painelBotaoDiminuirVol = new JPanel();
+        painelBotaoDiminuirVol.setBounds(750, 450, 250, 50);
+        painelBotaoDiminuirVol.setBackground(Color.black);
+
+        botaoDiminuirVol = new JButton("DIMINUIR VOLUME");
+        configurarBotao(botaoDiminuirVol);
+        botaoDiminuirVol.addActionListener(vhd);
+
+        painelBotaoDiminuirVol.add(botaoDiminuirVol);
+
+        painelBotaoDiminuirVol.setVisible(false);
+
         // BOTAO PERSONAGEM KALROK
         painelBotaoPersonagemKalrok = new JPanel();
         painelBotaoPersonagemKalrok.setBounds(550, 500, 200, 50);
-        painelBotaoPersonagemKalrok.setBackground(Color.yellow);
+        painelBotaoPersonagemKalrok.setBackground(Color.black);
 
         botaoPersonagemKalrok = new JButton("KALROK");
         configurarBotao(botaoPersonagemKalrok);
@@ -183,7 +215,7 @@ public class PainelJogo {
         // BOTAO PERSONAGEM LOHAN
         painelBotaoPersonagemLohan = new JPanel();
         painelBotaoPersonagemLohan.setBounds(750, 500, 200, 50);
-        painelBotaoPersonagemLohan.setBackground(Color.yellow);
+        painelBotaoPersonagemLohan.setBackground(Color.black);
 
         botaoPersonagemLohan = new JButton("LOHAN");
         configurarBotao(botaoPersonagemLohan);
@@ -202,6 +234,9 @@ public class PainelJogo {
         con.add(painelBotaoVoltarConfig);
         con.add(painelBotaoVoltarPontuacoes);
         con.add(painelBotaoVoltarIniciar);
+
+        con.add(painelBotaoAumentarVol);
+        con.add(painelBotaoDiminuirVol);
 
         con.add(painelBotaoPersonagemKalrok);
         con.add(painelBotaoPersonagemLohan);
@@ -226,14 +261,38 @@ public class PainelJogo {
         painelBotaoStart.setVisible(false);
         painelBotaoConfig.setVisible(false);
         painelBotaoPontuacoes.setVisible(false);
+        painelBotaoVoltarConfig.setVisible(false);
+        painelBotaoVoltarPontuacoes.setVisible(false);
         painelBotaoVoltarIniciar.setVisible(true);
+        painelBotaoPersonagemKalrok.setVisible(true);
+        painelBotaoPersonagemLohan.setVisible(true);
+    }
 
+    public void iniciarJogo(String personagem){
+        painelTitulo.setVisible(false);
+        painelBotaoStart.setVisible(false);
+        painelBotaoConfig.setVisible(false);
+        painelBotaoPontuacoes.setVisible(false);
+        painelBotaoVoltarConfig.setVisible(false);
+        painelBotaoVoltarPontuacoes.setVisible(false);
+        painelBotaoVoltarIniciar.setVisible(false);
+        painelBotaoPersonagemKalrok.setVisible(false);
+        painelBotaoPersonagemLohan.setVisible(false);
+
+        // IMAGEM DA CENA PARTE DE CIMA/MEIO
+        painelImagemApartamento = new JPanel();
+        painelImagemApartamento.setBounds(0, 0, larguraTJ, 100);
+        painelImagemApartamento.setBackground(Color.white);
+
+        painelImagemApartamento.setVisible(true);
+
+        // TEXTO PARTE DEBAIXO DO JOGO
         painelTextoPadrao = new JPanel();
-        painelTextoPadrao.setBounds(0, (alturaTJ - 300), larguraTJ, 400);
+        painelTextoPadrao.setBounds(0, 500, larguraTJ, 400);
         painelTextoPadrao.setBackground(Color.gray);
 
         areaTextoPadrao = new JTextArea("olá teste");
-        areaTextoPadrao.setBounds(0, (alturaTJ - 300), larguraTJ, 400);
+        areaTextoPadrao.setBounds(0, 500, larguraTJ, 400);
         areaTextoPadrao.setBackground(Color.gray);
         areaTextoPadrao.setForeground(Color.white);
         areaTextoPadrao.setFont(fontePadrao);
@@ -241,11 +300,10 @@ public class PainelJogo {
         
         painelTextoPadrao.add(areaTextoPadrao);
 
+        painelTextoPadrao.setVisible(true);
+
+        con.add(painelImagemApartamento);
         con.add(painelTextoPadrao);
-    }
-
-    public void iniciarJogo(String personagem){
-
     }
 
     public void abrirConfigs(){
