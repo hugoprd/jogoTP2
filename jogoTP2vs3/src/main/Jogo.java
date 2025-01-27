@@ -459,6 +459,8 @@ public class Jogo extends JFrame{
     }
 
     public void abrirInventario(){
+        pj.csh.tocarClickSound();
+
         pj.playerPanel.setVisible(false);
         pj.painelImagemComodo.setVisible(false);
         pj.painelBotaoProximoInGame.setVisible(false);
@@ -481,6 +483,8 @@ public class Jogo extends JFrame{
     }
 
     public void voltarPainelJogo(){
+        pj.csh.tocarClickSound();
+        
         pj.playerPanel.setVisible(true);
         pj.painelImagemComodo.setVisible(true);
         pj.painelBotaoProximoInGame.setVisible(true);
