@@ -58,7 +58,7 @@ public class PainelJogo {
     JButton botaoVoltarConfig, botaoVoltarPontuacoes, botaoVoltarIniciar;
     JButton botaoPersonagemKalrok, botaoPersonagemLohan;
     JButton botaoAumentarVol, botaoDiminuirVol;
-    JButton personagemBotaoInventario, personagemBotaoVoltarInventario;
+    JButton personagemBotaoUsarHabilidade, personagemBotaoInventario, personagemBotaoVoltarInventario;
 
     // menu
     TitleScreenHandler tsh = new TitleScreenHandler(this);

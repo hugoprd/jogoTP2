@@ -4,11 +4,13 @@ public class Item{
     protected String nome;
     protected int recEnergia;
     protected int dificuldadeAchar;
+    protected boolean pista;
 
-    public Item(String nome, int recEnergia, int dificuldadeAchar){
+    public Item(String nome, int recEnergia, int dificuldadeAchar, boolean pista){
         setNome(nome);
         setRecEnergia(recEnergia);
         setDificuldadeAchar(dificuldadeAchar);
+        this.pista = pista;
     }
 
     public String getNome(){
@@ -44,12 +46,16 @@ public class Item{
     }
 
     public boolean setDificuldadeAchar(int dificuldadeAchar){
-        if(dificuldadeAchar > 0){
+        if(dificuldadeAchar >= 0){
             this.dificuldadeAchar = dificuldadeAchar;
 
             return true;
         }
 
         return false;
+    }
+
+    public boolean getPista(){
+        return pista;
     }
 }

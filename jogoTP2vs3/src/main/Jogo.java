@@ -1,15 +1,14 @@
 package main;
 
+import entidade.Item;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import entidade.Item;
 
 public class Jogo extends JFrame{
     PainelJogo pj;
@@ -17,12 +16,26 @@ public class Jogo extends JFrame{
     PersonagemJogavel protagonista;
     Autoestima autoestima;
 
+    // itens dos comodos
+    Item pedacoQueijo = new Item("queijo", 5, 1, false); // dentro da geladeira da cozinha
+    Item caixaLeite = new Item("leite", 2, 1, false); // dentro da geladeira da cozinha
+    Item peCabra = new Item("peDeCabra", 0, 3, false); // dentro de uma costura da poltrona da sala
+    Item garrafaCerveja = new Item("cerveja", 3, 2, false); // dentro de um armario da cozinha
+    Item clipePapel = new Item("clipe", 0, 3, false); // dentro da gaveta da cabiceira do quarto
+
+    // pistas
+    Item facaSangue = new Item("facaEnsanguentada", 0, 2, true); // debaixo da cama
+    Item papelSangue = new Item("papelEnsanguentado", 0, 4, true); // atras de uma parede falsa
+                                                                                                        // no fundo do guarda-roupa
+                                                                                                        // no quarto !precisa ter
+                                                                                                        // pé de cabra para abrir
+
     public Jogo(PainelJogo pj){
         this.pj = pj;
     }
 
     public enum PersonagemJogavel{
-        KALROK("kalrok", 54, 40, "/src/lib/sounds/textSounds/somTextoKalrok.wav"){
+        KALROK("kalrok", 54, 40, "/src/lib/sounds/textSounds/somTextoKalrok.wav", false){
             @Override
             public void contarHistoria(){
                 System.out.println("Kalrok é um rato detetive que trabalha em um departamento, porém é desvalorizado constantemente e por isso tem objetivo de mudar de vida.");
@@ -31,6 +44,16 @@ public class Jogo extends JFrame{
             @Override
             public void utilizarPoder(){
                 System.out.println("Nome do poder: Investigação do roedor\nDescrição: Perde dez (10) de energia para conseguir ver com mais facilidade as coisas escondidas");
+                if(energia >= 10){
+                    energia -= 10;
+                    for(Item x : inventario){
+                        if(x.getDificuldadeAchar() >= 2){
+                            x.setDificuldadeAchar(x.getDificuldadeAchar() - 2);
+                        }
+                    }
+                    JOptionPane.showMessageDialog(null, "VOCÊ PERDEU 10 DE ENERGIA, MAS AGORA ACHARÁ ITENS COM MAIS FACILIDADE", "Investigação do Roedor", JOptionPane.INFORMATION_MESSAGE);
+                    System.out.println("Perdeu 10 de energia e fez o efeito"); 
+                }               
             }
 
             @Override
@@ -38,7 +61,7 @@ public class Jogo extends JFrame{
                 inventario.add(itemX);
             }
         },
-        LOHAN("lohan", 24, 50, "/src/lib/sounds/textSounds/somTextoLohan.wav"){
+        LOHAN("lohan", 24, 50, "/src/lib/sounds/textSounds/somTextoLohan.wav", false){
             @Override
             public void contarHistoria(){
                 System.out.println("Lohan é um furão que sonha em se tornar um grande investigador e entrou recentemente neste ramo. Atualmente, trabalha para Kalrok onde é seu ajudante nos casos.");
@@ -47,6 +70,12 @@ public class Jogo extends JFrame{
             @Override
             public void utilizarPoder(){
                 System.out.println("Nome do poder: Mente de aço\nDescrição: Perde vinte (20) de energia para conseguir esquivar de um ataque inimigo");
+                if(energia >= 20){
+                    energia -= 20;
+                    esquivar = true;
+                    JOptionPane.showMessageDialog(null, "VOCÊ PERDEU 20 DE ENERGIA, MAS O PRÓXIMO GOLPE QUE SOFRER CONSEGUIRÁ ESQUIVAR", "Mente de Aço", JOptionPane.INFORMATION_MESSAGE);
+                    System.out.println("Perdeu 20 de energia e fez o efeito");
+                }
             }
         
             @Override
@@ -62,12 +91,15 @@ public class Jogo extends JFrame{
         protected String caminhoSom;
         protected File som;
 
-        PersonagemJogavel(String nome, int idade, int energia, String caminhoSom){
+        protected boolean esquivar;
+
+        PersonagemJogavel(String nome, int idade, int energia, String caminhoSom, boolean esquivar){
             this.nome = nome;
             this.idade = idade;
             this.energia = energia;
             this.caminhoSom = caminhoSom;
             setSom(getCaminhoSom());
+            this.esquivar = esquivar;
         }
 
         public abstract void contarHistoria();
@@ -329,7 +361,7 @@ public class Jogo extends JFrame{
         pj.playerPanel = new JPanel();
         pj.playerPanel.setBounds(0, 0, pj.larguraTJ, 50);
         pj.playerPanel.setBackground(Color.blue);
-        pj.playerPanel.setLayout(new GridLayout(1, 7));
+        pj.playerPanel.setLayout(new GridLayout(1, 8));
 
         pj.nomePersonagemLabel = new JLabel("PERSONAGEM:");
         pj.nomePersonagemLabel.setBackground(Color.black);
@@ -361,10 +393,17 @@ public class Jogo extends JFrame{
         pj.numeroEnergiaPersonagemLabel.setForeground(Color.white);
         pj.numeroEnergiaPersonagemLabel.setFont(pj.fontePadrao);
 
+        pj.personagemBotaoUsarHabilidade = new JButton("USAR PODER");
+        pj.configurarBotao(pj.personagemBotaoUsarHabilidade);
+        pj.personagemBotaoUsarHabilidade.addActionListener(e -> {
+            System.out.println("usando habilidade");
+            usarHabilidade();
+        });
+
         pj.personagemBotaoInventario = new JButton("INVENTÁRIO");
         pj.configurarBotao(pj.personagemBotaoInventario);
         pj.personagemBotaoInventario.addActionListener(e -> {
-            System.out.println("Executando metodo...");
+            System.out.println("abrindo inventario...");
             abrirInventario();
         });
 
@@ -374,6 +413,7 @@ public class Jogo extends JFrame{
         pj.playerPanel.add(pj.numeroIdadePersonagemLabel);
         pj.playerPanel.add(pj.energiaPersonagemLabel);
         pj.playerPanel.add(pj.numeroEnergiaPersonagemLabel);
+        pj.playerPanel.add(pj.personagemBotaoUsarHabilidade);
         pj.playerPanel.add(pj.personagemBotaoInventario);
 
         pj.playerPanel.setVisible(true);
@@ -408,7 +448,7 @@ public class Jogo extends JFrame{
         pj.personagemBotaoVoltarInventario = new JButton("VOLTAR");
         pj.configurarBotao(pj.personagemBotaoVoltarInventario);
         pj.personagemBotaoVoltarInventario.addActionListener(e -> {
-            System.out.println("Executando metodo...");
+            System.out.println("saindo do inventario...");
             voltarPainelJogo();
         });
 
@@ -488,7 +528,13 @@ public class Jogo extends JFrame{
     }
 
     public void telaChefe(){
-        
+
+    }
+
+    public void usarHabilidade(){
+        pj.csh.tocarClickSound();
+        protagonista.utilizarPoder();
+        pj.numeroEnergiaPersonagemLabel.setText("" + protagonista.energia);
     }
 
     public void abrirInventario(){
