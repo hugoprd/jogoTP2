@@ -24,8 +24,9 @@ public class PainelJogo {
     JPanel painelBotaoProximoInGame;
     // player
     JPanel playerPanel;
+    JPanel painelTituloPersonagemInventario, painelPersonagemInventario, painelPersonagemBotaoVoltarInventario;
     // cenas
-    JPanel painelImagemApartamento, painelImagemSala, painelImagemCozinha, painelImagemQuarto, painelImagemBanheiro;
+    JPanel painelImagemComodo, painelImagemApartamento, painelImagemSala, painelImagemCozinha, painelImagemQuarto, painelImagemBanheiro;
     JPanel painelImagemAutoestima, painelImagemChefe;
 
     // menu
@@ -34,7 +35,7 @@ public class PainelJogo {
     // player
     JLabel nomePersonagemLabel, textoNomePersonagemLabel, idadePersonagemLabel, 
     numeroIdadePersonagemLabel, energiaPersonagemLabel, numeroEnergiaPersonagemLabel;
-    JLabel painelInventario, painelPersonagemBotaoVoltarInventario;
+    JLabel tituloPersonagemInventario;
 
     JTextArea areaTextoPadrao;
 

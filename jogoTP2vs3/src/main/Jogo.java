@@ -363,7 +363,9 @@ public class Jogo extends JFrame{
 
         pj.personagemBotaoInventario = new JButton("INVENTÁRIO");
         pj.configurarBotao(pj.personagemBotaoInventario);
-        //pj.personagemBotaoInventario.addActionListener(bih); // botao inventario handler
+        pj.personagemBotaoInventario.addActionListener(e -> {
+            abrirInventario();
+        });
 
         pj.playerPanel.add(pj.nomePersonagemLabel);
         pj.playerPanel.add(pj.textoNomePersonagemLabel);
@@ -375,12 +377,49 @@ public class Jogo extends JFrame{
 
         pj.playerPanel.setVisible(true);
 
-        // IMAGEM DA CENA PARTE DE CIMA/MEIO
-        pj.painelImagemApartamento = new JPanel();
-        pj.painelImagemApartamento.setBounds(0, 50, pj.larguraTJ, 400);
-        pj.painelImagemApartamento.setBackground(Color.white);
+        // PAINEL INVENTARIO -> OUTRA PAGINA
+        pj.painelTituloPersonagemInventario = new JPanel();
+        pj.painelTituloPersonagemInventario.setBounds(550, 50, 300, 30);
+        pj.painelTituloPersonagemInventario.setBackground(Color.blue);
+        
+        pj.tituloPersonagemInventario = new JLabel("INVENTÁRIO");
+        pj.tituloPersonagemInventario.setBackground(Color.black);
+        pj.tituloPersonagemInventario.setForeground(Color.white);
+        pj.tituloPersonagemInventario.setFont(pj.fontePadrao);
 
-        pj.painelImagemApartamento.setVisible(true);
+        pj.painelTituloPersonagemInventario.add(pj.tituloPersonagemInventario);
+
+        pj.painelTituloPersonagemInventario.setVisible(false);
+
+        pj.painelPersonagemInventario = new JPanel();
+        pj.painelPersonagemInventario.setBounds(550, 80, 600, 700);
+        pj.painelPersonagemInventario.setBackground(Color.yellow);
+        pj.painelPersonagemInventario.setForeground(Color.white);
+        pj.painelPersonagemInventario.setLayout(new GridLayout(5, 1));
+        pj.painelPersonagemInventario.setFont(pj.fontePadrao);
+
+        pj.painelPersonagemInventario.setVisible(false);
+
+        pj.painelPersonagemBotaoVoltarInventario = new JPanel();
+        pj.painelPersonagemBotaoVoltarInventario.setBounds(550, 830, 200, 50);
+        pj.painelPersonagemBotaoVoltarInventario.setBackground(Color.red);
+        
+        pj.personagemBotaoVoltarInventario = new JButton("VOLTAR");
+        pj.configurarBotao(pj.personagemBotaoVoltarInventario);
+        pj.personagemBotaoInventario.addActionListener(e -> {
+            voltarPainelJogo();
+        });
+
+        pj.painelPersonagemBotaoVoltarInventario.add(pj.personagemBotaoVoltarInventario);
+
+        pj.painelPersonagemBotaoVoltarInventario.setVisible(false);
+
+        // IMAGEM DA CENA PARTE DE CIMA/MEIO
+        pj.painelImagemComodo = new JPanel();
+        pj.painelImagemComodo.setBounds(0, 50, pj.larguraTJ, 400);
+        pj.painelImagemComodo.setBackground(Color.white);
+
+        pj.painelImagemComodo.setVisible(true);
 
         // PARTE DO MEIO: BOTAO PROXIMO
         pj.painelBotaoProximoInGame = new JPanel();
@@ -412,10 +451,46 @@ public class Jogo extends JFrame{
         pj.painelTextoPadrao.setVisible(true);
 
         pj.con.add(pj.playerPanel);
-        pj.con.add(pj.painelImagemApartamento);
+        pj.con.add(pj.painelImagemComodo);
         pj.con.add(pj.painelBotaoProximoInGame);
         pj.con.add(pj.painelTextoPadrao);
 
         pj.con.repaint();
+    }
+
+    public void abrirInventario(){
+        pj.playerPanel.setVisible(false);
+        pj.painelImagemComodo.setVisible(false);
+        pj.painelBotaoProximoInGame.setVisible(false);
+        pj.painelTextoPadrao.setVisible(false);
+
+        if(protagonista.inventario != null && protagonista.inventario.size() > 0){
+            for(Item itemX : protagonista.inventario){
+                JLabel itemXLabel = new JLabel(itemX.getNome());
+
+                pj.painelPersonagemInventario.add(itemXLabel);
+
+                pj.painelPersonagemInventario.revalidate();
+                pj.painelPersonagemInventario.repaint();
+            }
+        }
+
+        pj.painelTituloPersonagemInventario.setVisible(true);
+        pj.painelPersonagemInventario.setVisible(true);
+        pj.painelPersonagemBotaoVoltarInventario.setVisible(true);
+    }
+
+    public void voltarPainelJogo(){
+        pj.playerPanel.setVisible(true);
+        pj.painelImagemComodo.setVisible(true);
+        pj.painelBotaoProximoInGame.setVisible(true);
+        pj.painelTextoPadrao.setVisible(true);
+        pj.painelTituloPersonagemInventario.setVisible(false);
+        pj.painelPersonagemInventario.setVisible(false);
+        pj.painelPersonagemBotaoVoltarInventario.setVisible(false);
+
+        pj.painelPersonagemInventario.removeAll();
+        pj.painelPersonagemInventario.revalidate();
+        pj.painelPersonagemInventario.repaint();
     }
 }
