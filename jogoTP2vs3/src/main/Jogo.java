@@ -356,10 +356,6 @@ public class Jogo extends JFrame{
         System.out.printf("\nAutoestima correspondente:\nCaminho imagem: %s\n", autoestima.getCaminhoImagem());
     }
 
-    public void telaComecoJogo(){
-        
-    }
-
     public void telaPadraoJogo(){
         // PARTE DE CIMA: STATUS DO PLAYER
         pj.playerPanel = new JPanel();
@@ -474,7 +470,6 @@ public class Jogo extends JFrame{
 
         pj.botaoProximoInGame = new JButton(">");
         pj.configurarBotao(pj.botaoProximoInGame);
-        //botaoProximoInGame.addActionListener(bph); // botao proximo handler
 
         pj.painelBotaoProximoInGame.add(pj.botaoProximoInGame);
 
@@ -491,7 +486,7 @@ public class Jogo extends JFrame{
         }
         pj.painelTextoPadrao.setBorder(BorderFactory.createLineBorder(Color.white, 3));
 
-        pj.areaTextoPadrao = new JTextArea("olá teste");
+        pj.areaTextoPadrao = new JTextArea("");
         pj.areaTextoPadrao.setBounds(35, 500, pj.larguraTJ - 35, 700);
         if(protagonista.getNome().equals("kalrok")){
             pj.areaTextoPadrao.setBackground(corKalrok);
@@ -517,7 +512,15 @@ public class Jogo extends JFrame{
 
         pj.con.repaint();
 
-        telaApartamento();
+        telaComecoJogo();
+    }
+
+    public void telaComecoJogo(){
+        pj.botaoProximoInGame.addActionListener(e -> {
+            pj.bpigh.escreverFrases(e, protagonista.getNome(), 1);
+        }); // botao proximo handler
+
+        pj.con.repaint();
     }
 
     public void telaApartamento(){

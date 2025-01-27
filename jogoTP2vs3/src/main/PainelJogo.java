@@ -87,11 +87,14 @@ public class PainelJogo {
     // start handler: kalrok || lohan
     StartHandlerK shk = new StartHandlerK(this);
     StartHandlerL shl = new StartHandlerL(this);
+    // text handler
+    BotaoProximoInGameHandler bpigh = new BotaoProximoInGameHandler(this);
 
     public Clip clip, clip2, clipClickSound;
     public FloatControl volumeControl;
 
     ControleMusicaTI cmti = new ControleMusicaTI(this);
+    ControleMusicaTJ cmtj = new ControleMusicaTJ(this);
 
     // TELA JOGO
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -461,7 +464,7 @@ public class PainelJogo {
 
         clip.stop();
         clip2.start();
-        clip2.loop(10);
+        clip2.loop(50);
 
         jogo.definirPersonagem(nomePersonagem);
         jogo.telaPadraoJogo();
