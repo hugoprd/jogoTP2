@@ -9,16 +9,21 @@ public class PainelJogo {
     JFrame jf;
     Container con;
 
-    JPanel painelTitulo, painelBotaoStart, painelBotaoConfig, painelBotaoPontuacoes;
-    JPanel painelTextoPadrao;
-    JPanel painelImagemApartamento, painelImagemSala, painelImagemCozinha, painelImagemQuarto, painelImagemBanheiro;
-    JPanel painelImagemAutoestima, painelImagemChefe;
-    JPanel painelBotaoProximoInGame;
+    // menu
+    JPanel painelTitulo, painelBotaoStart, painelBotaoConfig, painelBotaoPontuacoes, painelTituloTabPontuacoes;
     JPanel painelBotaoVoltarConfig, painelBotaoVoltarPontuacoes, painelBotaoVoltarIniciar;
     JPanel painelBotaoPersonagemKalrok, painelBotaoPersonagemLohan;
     JPanel painelBotaoAumentarVol, painelBotaoDiminuirVol;
+    // in-game
+    JPanel painelTextoPadrao;
+    JPanel painelBotaoProximoInGame;
+    // cenas
+    JPanel painelImagemApartamento, painelImagemSala, painelImagemCozinha, painelImagemQuarto, painelImagemBanheiro;
+    JPanel painelImagemAutoestima, painelImagemChefe;
 
+    // menu
     JLabel tituloJogo;
+    JLabel tituloTabPontuacoes;
 
     JTextArea areaTextoPadrao;
 
@@ -34,14 +39,16 @@ public class PainelJogo {
     // menu
     TitleScreenHandler tsh = new TitleScreenHandler(this);
     TitleScreenHandlerB tshb = new TitleScreenHandlerB(this);
-    // misc
+    // config
     ConfigHandler ch = new ConfigHandler(this);
-    // start handler: kalrok || lohan
-    StartHandlerK shk = new StartHandlerK(this);
-    StartHandlerL shl = new StartHandlerL(this);
     // aumentar diminuir volume
     VolHandlerUp vhu = new VolHandlerUp(this);
     VolHandlerDown vhd = new VolHandlerDown(this);
+    // pontuacao
+    PontuacaoHandler ph = new PontuacaoHandler(this);
+    // start handler: kalrok || lohan
+    StartHandlerK shk = new StartHandlerK(this);
+    StartHandlerL shl = new StartHandlerL(this);
 
     public Clip clip;
     public FloatControl volumeControl;
@@ -115,24 +122,11 @@ public class PainelJogo {
 
         botaoPontuacoes = new JButton("PONTUAÇÕES");
         configurarBotao(botaoPontuacoes);
-        botaoPontuacoes.addActionListener(tsh);
+        botaoPontuacoes.addActionListener(ph);
 
         painelBotaoPontuacoes.add(botaoPontuacoes);
         
         painelBotaoPontuacoes.setVisible(true);
-
-        // BOTAO PROXIMO IN-GAME
-        painelBotaoProximoInGame = new JPanel();
-        painelBotaoProximoInGame.setBounds(650, 500, 200, 50);
-        painelBotaoProximoInGame.setBackground(Color.black);
-
-        botaoProximoInGame = new JButton(">");
-        configurarBotao(botaoProximoInGame);
-        botaoProximoInGame.addActionListener(tsh);
-
-        painelBotaoProximoInGame.add(botaoProximoInGame);
-
-        painelBotaoProximoInGame.setVisible(false);
 
         // BOTAO VOLTAR DA CONFIGURACAO
         painelBotaoVoltarConfig = new JPanel();
@@ -225,6 +219,19 @@ public class PainelJogo {
 
         painelBotaoPersonagemLohan.setVisible(false);
 
+        // BOTAO PROXIMO IN-GAME
+        painelBotaoProximoInGame = new JPanel();
+        painelBotaoProximoInGame.setBounds(650, 500, 200, 50);
+        painelBotaoProximoInGame.setBackground(Color.black);
+
+        botaoProximoInGame = new JButton(">");
+        configurarBotao(botaoProximoInGame);
+        botaoProximoInGame.addActionListener(tsh);
+
+        painelBotaoProximoInGame.add(botaoProximoInGame);
+
+        painelBotaoProximoInGame.setVisible(false);
+
         // MENU DO JOGO
         con.add(painelTitulo);
         con.add(painelBotaoStart);
@@ -236,11 +243,13 @@ public class PainelJogo {
         con.add(painelBotaoVoltarPontuacoes);
         con.add(painelBotaoVoltarIniciar);
 
-        // BOTOES DE AUMENTAR E DIMINUIR VOLUME DAS CONFIG
+        // CONFIG DO JOGO
         con.add(painelBotaoAumentarVol);
         con.add(painelBotaoDiminuirVol);
 
-        // BOTOES DE SELECAO DE PERSONAGEM DA PAGINA DE INICIO DO JOGO(!= DO MENU)
+        // PONTUACOES DO JOGO
+
+        // INICIO DO JOGO: SELECAO DE PERSONAGENS
         con.add(painelBotaoPersonagemKalrok);
         con.add(painelBotaoPersonagemLohan);
 
@@ -324,7 +333,29 @@ public class PainelJogo {
     }
 
     public void abrirPontuacoes(){
+        painelTitulo.setVisible(false);
+        painelBotaoStart.setVisible(false);
+        painelBotaoConfig.setVisible(false);
+        painelBotaoPontuacoes.setVisible(false);
+        painelBotaoVoltarConfig.setVisible(false);
+        painelBotaoAumentarVol.setVisible(false);
+        painelBotaoDiminuirVol.setVisible(false);
+        painelBotaoVoltarPontuacoes.setVisible(true);
 
+        // titulo tabela
+        painelTituloTabPontuacoes = new JPanel();
+        painelTituloTabPontuacoes.setBounds(500, 50, 500, 75);
+        painelTituloTabPontuacoes.setBackground(Color.black);
+
+        tituloTabPontuacoes = new JLabel("PONTUAÇÕES:");
+        tituloTabPontuacoes.setForeground(Color.white);
+        tituloTabPontuacoes.setFont(fonteTitulo);
+
+        painelTituloTabPontuacoes.add(tituloTabPontuacoes);
+
+        //conteudo tabela
+
+        con.add(painelTituloTabPontuacoes);
     }
 
     public void configurarBotao(JButton botao){
