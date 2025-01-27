@@ -8,7 +8,7 @@ public class PersonagemJogavel implements Personagem{
     protected int idade;
     protected int energia;
     protected ArrayList<Item> inventario = new ArrayList<>();
-    
+
     protected String caminhoSom;
     protected File somPersonagem;
 
@@ -98,8 +98,7 @@ public class PersonagemJogavel implements Personagem{
     }
 
     @Override
-    public void adicionarItem(){
+    public void adicionarItem(Item itemX){
         throw new UnsupportedOperationException("Unimplemented method 'adicionarItem'");
     }
-    
 }

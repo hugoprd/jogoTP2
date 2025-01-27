@@ -15,14 +15,45 @@ public class Jogo extends JFrame{
     PainelJogo pj;
 
     PersonagemJogavel protagonista;
+    Autoestima autoestima;
 
     public Jogo(PainelJogo pj){
         this.pj = pj;
     }
 
     public enum PersonagemJogavel{
-        KALROK("kalrok", 54, 50, "/src/lib/sounds/textSounds/somTextoKalrok.wav"),
-        LOHAN("lohan", 24, 35, "/src/lib/sounds/textSounds/somTextoLohan.wav");
+        KALROK("kalrok", 54, 40, "/src/lib/sounds/textSounds/somTextoKalrok.wav"){
+            @Override
+            public void contarHistoria(){
+                System.out.println("Kalrok é um rato detetive que trabalha em um departamento, porém é desvalorizado constantemente e por isso tem objetivo de mudar de vida.");
+            }
+
+            @Override
+            public void utilizarPoder(){
+                System.out.println("Nome do poder: Investigação do roedor\nDescrição: Perde dez (10) de energia para conseguir ver com mais facilidade as coisas escondidas");
+            }
+
+            @Override
+            public void adicionarItem(Item itemX){
+                inventario.add(itemX);
+            }
+        },
+        LOHAN("lohan", 24, 50, "/src/lib/sounds/textSounds/somTextoLohan.wav"){
+            @Override
+            public void contarHistoria(){
+                System.out.println("Lohan é um furão que sonha em se tornar um grande investigador e entrou recentemente neste ramo. Atualmente, trabalha para Kalrok onde é seu ajudante nos casos.");
+            }
+        
+            @Override
+            public void utilizarPoder(){
+                System.out.println("Nome do poder: Mente de aço\nDescrição: Perde vinte (20) de energia para conseguir esquivar de um ataque inimigo");
+            }
+        
+            @Override
+            public void adicionarItem(Item itemX){
+                inventario.add(itemX);
+            }
+        };
 
         protected String nome;
         protected int idade;
@@ -38,6 +69,10 @@ public class Jogo extends JFrame{
             this.caminhoSom = caminhoSom;
             setSom(getCaminhoSom());
         }
+
+        public abstract void contarHistoria();
+        public abstract void utilizarPoder();
+        public abstract void adicionarItem(Item itemX);
 
         public String getNome() {
             return nome;
@@ -271,7 +306,18 @@ public class Jogo extends JFrame{
     }
 
     public void definirPersonagem(String nomePersonagem){
+        protagonista = PersonagemJogavel.fromNome(nomePersonagem);
 
+        if(protagonista.getNome().equals("kalrok")){
+            autoestima = Autoestima.fromNome("/src/lib/imagens/autoestimaKalrok.png");
+        }
+        else if(protagonista.getNome().equals("lohan")){
+            autoestima = Autoestima.fromNome("/src/lib/imagens/autoestimaLohan.png");
+        }
+
+        System.out.printf("\nPersonagem selecionado:\nNome: %s\nIdade: %d\nEnergia: %d\n", protagonista.getNome(),
+        protagonista.getIdade(), protagonista.getEnergia());
+        System.out.printf("\nAutoestima correspondente:\nCaminho imagem: %s\n", autoestima.getCaminhoImagem());
     }
 
     public void telaComecoJogo(){
@@ -283,24 +329,34 @@ public class Jogo extends JFrame{
         pj.playerPanel = new JPanel();
         pj.playerPanel.setBounds(0, 0, pj.larguraTJ, 50);
         pj.playerPanel.setBackground(Color.blue);
-        pj.playerPanel.setLayout(new GridLayout(1, 5));
+        pj.playerPanel.setLayout(new GridLayout(1, 7));
 
         pj.nomePersonagemLabel = new JLabel("PERSONAGEM:");
         pj.nomePersonagemLabel.setBackground(Color.black);
         pj.nomePersonagemLabel.setForeground(Color.white);
         pj.nomePersonagemLabel.setFont(pj.fontePadrao);
 
-        pj.textoNomePersonagemLabel = new JLabel(nomePersonagem);
+        pj.textoNomePersonagemLabel = new JLabel(protagonista.getNome());
         pj.textoNomePersonagemLabel.setBackground(Color.black);
         pj.textoNomePersonagemLabel.setForeground(Color.white);
         pj.textoNomePersonagemLabel.setFont(pj.fontePadrao);
+
+        pj.idadePersonagemLabel = new JLabel("IDADE:");
+        pj.idadePersonagemLabel.setBackground(Color.black);
+        pj.idadePersonagemLabel.setForeground(Color.white);
+        pj.idadePersonagemLabel.setFont(pj.fontePadrao);
+
+        pj.numeroIdadePersonagemLabel = new JLabel("" + protagonista.getIdade());
+        pj.numeroIdadePersonagemLabel.setBackground(Color.black);
+        pj.numeroIdadePersonagemLabel.setForeground(Color.white);
+        pj.numeroIdadePersonagemLabel.setFont(pj.fontePadrao);
 
         pj.energiaPersonagemLabel = new JLabel("ENERGIA:");
         pj.energiaPersonagemLabel.setBackground(Color.black);
         pj.energiaPersonagemLabel.setForeground(Color.white);
         pj.energiaPersonagemLabel.setFont(pj.fontePadrao);
 
-        pj.numeroEnergiaPersonagemLabel = new JLabel("50");
+        pj.numeroEnergiaPersonagemLabel = new JLabel("" + protagonista.getEnergia());
         pj.numeroEnergiaPersonagemLabel.setBackground(Color.black);
         pj.numeroEnergiaPersonagemLabel.setForeground(Color.white);
         pj.numeroEnergiaPersonagemLabel.setFont(pj.fontePadrao);
@@ -311,6 +367,8 @@ public class Jogo extends JFrame{
 
         pj.playerPanel.add(pj.nomePersonagemLabel);
         pj.playerPanel.add(pj.textoNomePersonagemLabel);
+        pj.playerPanel.add(pj.idadePersonagemLabel);
+        pj.playerPanel.add(pj.numeroIdadePersonagemLabel);
         pj.playerPanel.add(pj.energiaPersonagemLabel);
         pj.playerPanel.add(pj.numeroEnergiaPersonagemLabel);
         pj.playerPanel.add(pj.personagemBotaoInventario);

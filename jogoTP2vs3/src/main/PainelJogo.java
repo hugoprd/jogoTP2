@@ -32,7 +32,9 @@ public class PainelJogo {
     JLabel tituloJogo;
     JLabel tituloTabPontuacoes;
     // player
-    JLabel nomePersonagemLabel, textoNomePersonagemLabel, energiaPersonagemLabel, numeroEnergiaPersonagemLabel;
+    JLabel nomePersonagemLabel, textoNomePersonagemLabel, idadePersonagemLabel, 
+    numeroIdadePersonagemLabel, energiaPersonagemLabel, numeroEnergiaPersonagemLabel;
+    JLabel painelInventario, painelPersonagemBotaoVoltarInventario;
 
     JTextArea areaTextoPadrao;
 
@@ -44,7 +46,7 @@ public class PainelJogo {
     JButton botaoVoltarConfig, botaoVoltarPontuacoes, botaoVoltarIniciar;
     JButton botaoPersonagemKalrok, botaoPersonagemLohan;
     JButton botaoAumentarVol, botaoDiminuirVol;
-    JButton personagemBotaoInventario;
+    JButton personagemBotaoInventario, personagemBotaoVoltarInventario;
 
     // menu
     TitleScreenHandler tsh = new TitleScreenHandler(this);
