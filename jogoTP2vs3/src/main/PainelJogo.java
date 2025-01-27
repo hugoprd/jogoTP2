@@ -247,8 +247,6 @@ public class PainelJogo {
         con.add(painelBotaoAumentarVol);
         con.add(painelBotaoDiminuirVol);
 
-        // PONTUACOES DO JOGO
-
         // INICIO DO JOGO: SELECAO DE PERSONAGENS
         con.add(painelBotaoPersonagemKalrok);
         con.add(painelBotaoPersonagemLohan);
@@ -270,6 +268,7 @@ public class PainelJogo {
         painelBotaoPersonagemLohan.setVisible(false);
         painelBotaoAumentarVol.setVisible(false);
         painelBotaoDiminuirVol.setVisible(false);
+        painelTituloTabPontuacoes.setVisible(false);
     }
 
     public void criarTelaJogo(){
@@ -282,6 +281,7 @@ public class PainelJogo {
         painelBotaoVoltarIniciar.setVisible(true);
         painelBotaoPersonagemKalrok.setVisible(true);
         painelBotaoPersonagemLohan.setVisible(true);
+        painelTituloTabPontuacoes.setVisible(false);
     }
 
     public void iniciarJogo(String personagem){
@@ -294,6 +294,7 @@ public class PainelJogo {
         painelBotaoVoltarIniciar.setVisible(false);
         painelBotaoPersonagemKalrok.setVisible(false);
         painelBotaoPersonagemLohan.setVisible(false);
+        painelTituloTabPontuacoes.setVisible(false);
 
         // IMAGEM DA CENA PARTE DE CIMA/MEIO
         painelImagemApartamento = new JPanel();
@@ -330,6 +331,7 @@ public class PainelJogo {
         painelBotaoVoltarConfig.setVisible(true);
         painelBotaoAumentarVol.setVisible(true);
         painelBotaoDiminuirVol.setVisible(true);
+        painelTituloTabPontuacoes.setVisible(false);
     }
 
     public void abrirPontuacoes(){
