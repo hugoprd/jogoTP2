@@ -29,7 +29,8 @@ public class Jogo extends JFrame{
                                                                                                         // no fundo do guarda-roupa
                                                                                                         // no quarto !precisa ter
                                                                                                         // pé de cabra para abrir
-
+    int escalaXY = 128 * 3;
+    
     public Jogo(PainelJogo pj){
         this.pj = pj;
     }
@@ -144,11 +145,11 @@ public class Jogo extends JFrame{
     }
 
     public enum Comodo{
-        APARTAMENTO("apartamento", "src/lib/imagens/cenaApartamento1.png"),
-        SALA("sala", "src/lib/imagens/cenaSala1.png"),
-        QUARTO("quarto", "src/lib/imagens/cenaQuarto1.png"),
-        COZINHA("cozinha", "src/lib/imagens/cenaCozinha1.png"),
-        BANHEIRO("banheiro", "src/lib/imagens/cenaBanheiro1.png");
+        APARTAMENTO("apartamento", "/lib/imagens/cenaApartamento1.png"),
+        SALA("sala", "/lib/imagens/cenaSala1.png"),
+        QUARTO("quarto", "/lib/imagens/cenaQuarto1.png"),
+        COZINHA("cozinha", "/lib/imagens/cenaCozinha1.png"),
+        BANHEIRO("banheiro", "/lib/imagens/cenaBanheiro1.png");
 
         protected String nome;
         protected String caminhoImagem1;
@@ -163,8 +164,8 @@ public class Jogo extends JFrame{
         Comodo(String nome, String caminhoImagem1){
             setNome(nome);
             setCaminhoImagem1(caminhoImagem1);
-            setImagens(getCaminhoImagem1());
-            getImagem();
+            //setImagens(getCaminhoImagem1());
+            //getImagem();
         }
 
         public String getNome(){
@@ -360,7 +361,7 @@ public class Jogo extends JFrame{
         // PARTE DE CIMA: STATUS DO PLAYER
         pj.playerPanel = new JPanel();
         pj.playerPanel.setBounds(0, 0, pj.larguraTJ, 50);
-        pj.playerPanel.setBackground(Color.blue);
+        pj.playerPanel.setBackground(Color.black);
         pj.playerPanel.setLayout(new GridLayout(1, 8));
 
         pj.nomePersonagemLabel = new JLabel("PERSONAGEM:");
@@ -459,7 +460,7 @@ public class Jogo extends JFrame{
         // IMAGEM DA CENA PARTE DE CIMA/MEIO
         pj.painelImagemComodo = new JPanel();
         pj.painelImagemComodo.setBounds(0, 50, pj.larguraTJ, 400);
-        pj.painelImagemComodo.setBackground(Color.white);
+        pj.painelImagemComodo.setBackground(Color.black);
 
         pj.painelImagemComodo.setVisible(true);
 
@@ -479,11 +480,12 @@ public class Jogo extends JFrame{
         // TEXTO PARTE DEBAIXO DO JOGO
         pj.painelTextoPadrao = new JPanel();
         pj.painelTextoPadrao.setBounds(0, 500, pj.larguraTJ, 700);
-        pj.painelTextoPadrao.setBackground(Color.gray);
+        pj.painelTextoPadrao.setBackground(Color.black);
+        pj.painelTextoPadrao.setBorder(BorderFactory.createLineBorder(Color.white, 3));
 
         pj.areaTextoPadrao = new JTextArea("olá teste");
         pj.areaTextoPadrao.setBounds(35, 500, pj.larguraTJ - 35, 700);
-        pj.areaTextoPadrao.setBackground(Color.gray);
+        pj.areaTextoPadrao.setBackground(Color.black);
         pj.areaTextoPadrao.setForeground(Color.white);
         pj.areaTextoPadrao.setFont(pj.fontePadrao);
         pj.areaTextoPadrao.setLineWrap(true); //texto vai pra baixo automaticamente
@@ -501,10 +503,30 @@ public class Jogo extends JFrame{
         pj.con.add(pj.painelTextoPadrao);
 
         pj.con.repaint();
+
+        telaApartamento();
     }
 
     public void telaApartamento(){
+        Comodo apartamento = Comodo.fromNome("apartamento");
+        System.out.println("Caminho cena apartamento: " + apartamento.getCaminhoImagem1());
 
+        ImageIcon cenaApartamento = new ImageIcon(getClass().getResource(apartamento.getCaminhoImagem1()));
+        System.out.println(Comodo.APARTAMENTO.getCaminhoImagem1());
+
+        Image imagem = cenaApartamento.getImage().getScaledInstance(escalaXY, escalaXY, Image.SCALE_SMOOTH);
+        ImageIcon imagemIcon = new ImageIcon(imagem);
+
+        JLabel labelCena = new JLabel(imagemIcon);
+        labelCena.setVisible(true);
+
+        pj.painelImagemComodo.add(labelCena, BorderLayout.CENTER);
+
+        pj.painelImagemComodo.revalidate();
+        pj.painelImagemComodo.repaint();
+
+        pj.con.revalidate();
+        pj.con.repaint();
     }
 
     public void telaSala(){

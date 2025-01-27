@@ -31,8 +31,8 @@ public class Comodo implements Obstaculo{
 
         setNome(nome);
         setCaminhoImagem1(caminhoImagem1);
-        setImagens(getCaminhoImagem1());
-        getImagem();
+        //setImagens(getCaminhoImagem1());
+        //getImagem();
     }
 
     public String getNome(){
@@ -47,6 +47,10 @@ public class Comodo implements Obstaculo{
         }
 
         return false;
+    }
+
+    public void addItem(Item itemX){
+        itens.add(itemX);
     }
 
     public String getCaminhoImagem1(){
