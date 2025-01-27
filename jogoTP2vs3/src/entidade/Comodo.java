@@ -18,16 +18,16 @@ public class Comodo implements Obstaculo{
     protected String caminhoImagem1;
     protected ArrayList<Item> itens = new ArrayList<>();
 
-    PainelJogo pj;
+    //PainelJogo pj;
     
-    public BufferedImage img1;
+    protected BufferedImage img1;
 
     Toolkit toolkit = Toolkit.getDefaultToolkit();
 
     Dimension screenSize = toolkit.getScreenSize();
 
-    public Comodo(String nome, String caminhoImagem1, PainelJogo pj){
-        this.pj = pj;
+    public Comodo(String nome, String caminhoImagem1){ //PainelJogo pj){
+        //this.pj = pj;
 
         setNome(nome);
         setCaminhoImagem1(caminhoImagem1);

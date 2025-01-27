@@ -12,6 +12,8 @@ public class PainelJogo {
     JFrame jf;
     Container con;
 
+    Jogo jogo = new Jogo(this);
+
     // menu
     JPanel painelTitulo, painelBotaoStart, painelBotaoConfig, painelBotaoPontuacoes, painelTituloTabPontuacoes;
     JPanel painelBotaoVoltarConfig, painelBotaoVoltarPontuacoes, painelBotaoVoltarIniciar;
@@ -29,6 +31,8 @@ public class PainelJogo {
     // menu
     JLabel tituloJogo;
     JLabel tituloTabPontuacoes;
+    // player
+    JLabel nomePersonagemLabel, textoNomePersonagemLabel, energiaPersonagemLabel, numeroEnergiaPersonagemLabel;
 
     JTextArea areaTextoPadrao;
 
@@ -40,6 +44,7 @@ public class PainelJogo {
     JButton botaoVoltarConfig, botaoVoltarPontuacoes, botaoVoltarIniciar;
     JButton botaoPersonagemKalrok, botaoPersonagemLohan;
     JButton botaoAumentarVol, botaoDiminuirVol;
+    JButton personagemBotaoInventario;
 
     // menu
     TitleScreenHandler tsh = new TitleScreenHandler(this);
@@ -283,7 +288,7 @@ public class PainelJogo {
         }
     }
 
-    public void iniciarJogo(String personagem){
+    public void iniciarJogo(String nomePersonagem){
         painelTitulo.setVisible(false);
         painelBotaoStart.setVisible(false);
         painelBotaoConfig.setVisible(false);
@@ -297,56 +302,8 @@ public class PainelJogo {
             painelTituloTabPontuacoes.setVisible(false);
         }
 
-        // PARTE DE CIMA: STATUS DO PLAYER
-        playerPanel = new JPanel();
-        playerPanel.setBounds(0, 0, larguraTJ, 50);
-        playerPanel.setBackground(Color.blue);
-        playerPanel.setLayout(new GridLayout(1, 4));
-
-        playerPanel.setVisible(true);
-
-        // IMAGEM DA CENA PARTE DE CIMA/MEIO
-        painelImagemApartamento = new JPanel();
-        painelImagemApartamento.setBounds(0, 50, larguraTJ, 400);
-        painelImagemApartamento.setBackground(Color.white);
-
-        painelImagemApartamento.setVisible(true);
-
-        // PARTE DO MEIO: BOTAO PROXIMO
-        painelBotaoProximoInGame = new JPanel();
-        painelBotaoProximoInGame.setBounds(650, 455, 50, 40);
-        painelBotaoProximoInGame.setBackground(Color.black);
-
-        botaoProximoInGame = new JButton(">");
-        configurarBotao(botaoProximoInGame);
-        //botaoProximoInGame.addActionListener(tsh);
-
-        painelBotaoProximoInGame.add(botaoProximoInGame);
-
-        painelBotaoProximoInGame.setVisible(true);
-
-        // TEXTO PARTE DEBAIXO DO JOGO
-        painelTextoPadrao = new JPanel();
-        painelTextoPadrao.setBounds(0, 500, larguraTJ, 700);
-        painelTextoPadrao.setBackground(Color.gray);
-
-        areaTextoPadrao = new JTextArea("olá teste");
-        areaTextoPadrao.setBounds(35, 500, larguraTJ - 35, 700);
-        areaTextoPadrao.setBackground(Color.gray);
-        areaTextoPadrao.setForeground(Color.white);
-        areaTextoPadrao.setFont(fontePadrao);
-        areaTextoPadrao.setLineWrap(true); //texto vai pra baixo automaticamente
-        
-        painelTextoPadrao.add(areaTextoPadrao);
-
-        painelTextoPadrao.setVisible(true);
-
-        con.add(playerPanel);
-        con.add(painelImagemApartamento);
-        con.add(painelBotaoProximoInGame);
-        con.add(painelTextoPadrao);
-
-        con.repaint();
+        jogo.definirPersonagem(nomePersonagem);
+        jogo.telaPadraoJogo();
     }
 
     public void abrirConfigs(){
