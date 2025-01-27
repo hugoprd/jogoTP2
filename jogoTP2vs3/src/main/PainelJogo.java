@@ -16,6 +16,8 @@ public class PainelJogo {
 
     Jogo jogo = new Jogo(this);
 
+    String nomeJogador = "";
+
     long pontuacao;
 
     long tempoInicial = System.currentTimeMillis();
@@ -28,6 +30,10 @@ public class PainelJogo {
     // menu
     JPanel painelTitulo, painelBotaoStart, painelBotaoConfig, painelBotaoPontuacoes, painelTituloTabPontuacoes;
     JPanel painelBotaoVoltarConfig, painelBotaoVoltarPontuacoes, painelBotaoVoltarIniciar;
+    // tela de botar o nome
+    JPanel painelTituloNomeJogador, painelNomeJogador, painelBotaoConfirmarNome, painelBotaoVoltarNome;
+    // tela de escolher o personagem
+    JPanel painelTituloEscolherPersonagem;
     JPanel painelBotaoPersonagemKalrok, painelBotaoPersonagemLohan;
     JPanel painelBotaoAumentarVol, painelBotaoDiminuirVol;
     // in-game
@@ -43,6 +49,11 @@ public class PainelJogo {
     // menu
     JLabel tituloJogo;
     JLabel tituloTabPontuacoes;
+    // tela botar nome
+    JLabel tituloNomeJogador;
+    JTextField inputNomeJogador;
+    // escolha de personagem
+    JLabel tituloEscolherPersonagem;
     // player
     JLabel nomePersonagemLabel, textoNomePersonagemLabel, idadePersonagemLabel, 
     numeroIdadePersonagemLabel, energiaPersonagemLabel, numeroEnergiaPersonagemLabel;
@@ -55,7 +66,8 @@ public class PainelJogo {
 
     JButton botaoStart, botaoConfig, botaoPontuacoes;
     JButton botaoProximoInGame;
-    JButton botaoVoltarConfig, botaoVoltarPontuacoes, botaoVoltarIniciar;
+    JButton botaoVoltarConfig, botaoVoltarPontuacoes, botaoVoltarIniciar, botaoVoltarNome;
+    JButton botaoConfirmarNome;
     JButton botaoPersonagemKalrok, botaoPersonagemLohan;
     JButton botaoAumentarVol, botaoDiminuirVol;
     JButton personagemBotaoUsarHabilidade, personagemBotaoInventario, personagemBotaoVoltarInventario;
@@ -185,13 +197,29 @@ public class PainelJogo {
         painelBotaoVoltarIniciar.setBounds(650, 700, 200, 50);
         painelBotaoVoltarIniciar.setBackground(Color.black);
 
-        botaoVoltarIniciar = new JButton("MENU");
+        botaoVoltarIniciar = new JButton("VOLTAR");
         configurarBotao(botaoVoltarIniciar);
         botaoVoltarIniciar.addActionListener(tshb);
 
         painelBotaoVoltarIniciar.add(botaoVoltarIniciar);
 
         painelBotaoVoltarIniciar.setVisible(false);
+
+        // BOTAO VOLTAR DO NOME
+        painelBotaoVoltarNome = new JPanel();
+        painelBotaoVoltarNome.setBounds(650, 700, 200, 50);
+        painelBotaoVoltarNome.setBackground(Color.black);
+
+        botaoVoltarNome = new JButton("MENU");
+        configurarBotao(botaoVoltarNome);
+        botaoVoltarNome.addActionListener(e -> {
+            csh.tocarClickSound();
+            abrirMenu();
+        });
+
+        painelBotaoVoltarNome.add(botaoVoltarNome);
+
+        painelBotaoVoltarNome.setVisible(false);
 
         // BOTAO AUMENTAR VOLUME
         painelBotaoAumentarVol = new JPanel();
@@ -218,6 +246,63 @@ public class PainelJogo {
         painelBotaoDiminuirVol.add(botaoDiminuirVol);
 
         painelBotaoDiminuirVol.setVisible(false);
+
+        // TELA BOTAR NOME
+        painelTituloNomeJogador = new JPanel();
+        painelTituloNomeJogador.setBounds(500, 50, 500, 100);
+        painelTituloNomeJogador.setBackground(Color.black);
+        painelTituloNomeJogador.setForeground(Color.white);
+
+        tituloNomeJogador = new JLabel("COLOQUE SEU NOME:");
+        tituloNomeJogador.setBackground(Color.black);
+        tituloNomeJogador.setForeground(Color.white);
+        tituloNomeJogador.setFont(fonteTitulo);
+
+        painelTituloNomeJogador.add(tituloNomeJogador, BorderLayout.CENTER);
+
+        painelTituloNomeJogador.setVisible(false);
+
+        painelNomeJogador = new JPanel();
+        painelNomeJogador.setBounds(500, 150, 500, 200);
+        painelNomeJogador.setBackground(Color.black);
+        painelNomeJogador.setForeground(Color.white);
+        painelNomeJogador.setLayout(new FlowLayout());
+
+        inputNomeJogador = new JTextField(20);
+        inputNomeJogador.setBackground(Color.white);
+        inputNomeJogador.setForeground(Color.black);
+        inputNomeJogador.setFont(fontePadrao);
+
+        painelNomeJogador.add(inputNomeJogador, BorderLayout.CENTER);
+
+        painelNomeJogador.setVisible(false);
+
+        painelBotaoConfirmarNome = new JPanel();
+        painelBotaoConfirmarNome.setBounds(650, 600, 200, 50);
+        painelBotaoConfirmarNome.setBackground(Color.black);
+        painelBotaoConfirmarNome.setForeground(Color.white);
+
+        botaoConfirmarNome = new JButton("CONFIRMAR");
+        configurarBotao(botaoConfirmarNome);
+        botaoConfirmarNome.addActionListener(e -> {
+            if(inputNomeJogador.getText() != null){
+                csh.tocarClickSound();
+                nomeJogador = inputNomeJogador.getText().trim();
+                if(nomeJogador.isEmpty() || nomeJogador.length() > 20){
+                    System.out.println("o campo de texto nao pode estar vazio e nao pode ter mais de 20 caracteres");
+                }
+                else{
+                    criarTelaJogo();
+                }
+            }
+            else{
+                System.out.println("digite um nome válido e preencha o input");
+            }
+        });
+
+        painelBotaoConfirmarNome.add(botaoConfirmarNome);
+
+        painelBotaoConfirmarNome.setVisible(false);
 
         // BOTAO PERSONAGEM KALROK
         painelBotaoPersonagemKalrok = new JPanel();
@@ -260,6 +345,12 @@ public class PainelJogo {
         con.add(painelBotaoAumentarVol);
         con.add(painelBotaoDiminuirVol);
 
+        // INPUT DO NOME
+        con.add(painelTituloNomeJogador);
+        con.add(painelNomeJogador);
+        con.add(painelBotaoConfirmarNome);
+        con.add(painelBotaoVoltarNome);
+
         // INICIO DO JOGO: SELECAO DE PERSONAGENS
         con.add(painelBotaoPersonagemKalrok);
         con.add(painelBotaoPersonagemLohan);
@@ -278,10 +369,17 @@ public class PainelJogo {
         painelBotaoPersonagemLohan.setVisible(false);
         painelBotaoAumentarVol.setVisible(false);
         painelBotaoDiminuirVol.setVisible(false);
-        painelTituloTabPontuacoes.setVisible(false);
+        if(painelTituloTabPontuacoes != null){
+            painelTituloTabPontuacoes.setVisible(false);
+        }
         if(playerPanel != null){
             playerPanel.setVisible(false);
         }
+        painelTituloNomeJogador.setVisible(false);
+        painelNomeJogador.setVisible(false);
+        painelBotaoConfirmarNome.setVisible(false);
+        painelBotaoVoltarNome.setVisible(false);
+        painelTituloEscolherPersonagem.setVisible(false);
     }
 
     public void criarTelaJogo(){
@@ -300,6 +398,50 @@ public class PainelJogo {
         if(playerPanel != null){
             playerPanel.setVisible(false);
         }
+        painelTituloNomeJogador.setVisible(false);
+        painelNomeJogador.setVisible(false);
+        painelBotaoConfirmarNome.setVisible(false);
+        painelBotaoVoltarNome.setVisible(false);
+
+        painelTituloEscolherPersonagem = new JPanel();
+        painelTituloEscolherPersonagem.setBounds(500, 50, 400, 100);
+        painelTituloEscolherPersonagem.setBackground(Color.black);
+
+        tituloEscolherPersonagem = new JLabel();
+        tituloEscolherPersonagem.setText("Bem-vindo(a) " + nomeJogador);
+        tituloEscolherPersonagem.setBackground(Color.black);
+        tituloEscolherPersonagem.setForeground(Color.white);
+        tituloEscolherPersonagem.setFont(fonteTitulo);
+
+        painelTituloEscolherPersonagem.add(tituloEscolherPersonagem);
+
+        painelTituloEscolherPersonagem.setVisible(true);
+
+        con.add(painelTituloEscolherPersonagem);
+
+        con.repaint();
+    }
+
+    public void abrirTelaInputNome(){
+        painelTitulo.setVisible(false);
+        painelBotaoStart.setVisible(false);
+        painelBotaoConfig.setVisible(false);
+        painelBotaoPontuacoes.setVisible(false);
+        painelBotaoVoltarConfig.setVisible(false);
+        painelBotaoVoltarPontuacoes.setVisible(false);
+        painelBotaoVoltarIniciar.setVisible(false);
+        painelBotaoPersonagemKalrok.setVisible(false);
+        painelBotaoPersonagemLohan.setVisible(false);
+        painelTituloNomeJogador.setVisible(true);
+        painelNomeJogador.setVisible(true);
+        painelBotaoConfirmarNome.setVisible(true);
+        painelBotaoVoltarNome.setVisible(true);
+        if(painelTituloTabPontuacoes != null){
+            painelTituloTabPontuacoes.setVisible(false);
+        }
+        if(painelTituloEscolherPersonagem != null){
+            painelTituloEscolherPersonagem.setVisible(false);
+        }
     }
 
     public void iniciarJogo(String nomePersonagem){
@@ -315,6 +457,7 @@ public class PainelJogo {
         if(painelTituloTabPontuacoes != null){
             painelTituloTabPontuacoes.setVisible(false);
         }
+        painelTituloEscolherPersonagem.setVisible(false);
 
         jogo.definirPersonagem(nomePersonagem);
         jogo.telaPadraoJogo();

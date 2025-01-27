@@ -31,6 +31,8 @@ public class Jogo extends JFrame{
                                                                                                         // pé de cabra para abrir
     int escalaXY = 128 * 3;
     
+    Color corKalrok = Color.decode("");
+
     public Jogo(PainelJogo pj){
         this.pj = pj;
     }
@@ -354,7 +356,7 @@ public class Jogo extends JFrame{
     }
 
     public void telaComecoJogo(){
-
+        
     }
 
     public void telaPadraoJogo(){

@@ -13,7 +13,8 @@ public class TitleScreenHandler implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         pj.csh.tocarClickSound();
-        pj.criarTelaJogo();
+        //pj.criarTelaJogo();
+        pj.abrirTelaInputNome();
     }
     
 }
