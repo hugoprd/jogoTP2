@@ -1,5 +1,7 @@
 package main;
 
+import saves.SalvamentoJogo;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -13,6 +15,15 @@ public class PainelJogo {
     Container con;
 
     Jogo jogo = new Jogo(this);
+
+    long pontuacao;
+
+    long tempoInicial = System.currentTimeMillis();
+    long tempoFinal;
+    long tempoTotal = tempoInicial - tempoFinal;
+    //long segundos = (tempoTotal / 1000) % 60;
+    //long minutos = (tempoTotal / (1000 * 60)) % 60;
+    //long horas = (tempoTotal / (1000 * 60 * 60)) % 24;
 
     // menu
     JPanel painelTitulo, painelBotaoStart, painelBotaoConfig, painelBotaoPontuacoes, painelTituloTabPontuacoes;

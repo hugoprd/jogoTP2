@@ -364,6 +364,7 @@ public class Jogo extends JFrame{
         pj.personagemBotaoInventario = new JButton("INVENTÁRIO");
         pj.configurarBotao(pj.personagemBotaoInventario);
         pj.personagemBotaoInventario.addActionListener(e -> {
+            System.out.println("Executando metodo...");
             abrirInventario();
         });
 
@@ -379,21 +380,21 @@ public class Jogo extends JFrame{
 
         // PAINEL INVENTARIO -> OUTRA PAGINA
         pj.painelTituloPersonagemInventario = new JPanel();
-        pj.painelTituloPersonagemInventario.setBounds(550, 50, 300, 30);
-        pj.painelTituloPersonagemInventario.setBackground(Color.blue);
+        pj.painelTituloPersonagemInventario.setBounds(600, 50, 300, 50);
+        pj.painelTituloPersonagemInventario.setBackground(Color.black);
         
         pj.tituloPersonagemInventario = new JLabel("INVENTÁRIO");
         pj.tituloPersonagemInventario.setBackground(Color.black);
         pj.tituloPersonagemInventario.setForeground(Color.white);
-        pj.tituloPersonagemInventario.setFont(pj.fontePadrao);
+        pj.tituloPersonagemInventario.setFont(pj.fonteTitulo);
 
         pj.painelTituloPersonagemInventario.add(pj.tituloPersonagemInventario);
 
         pj.painelTituloPersonagemInventario.setVisible(false);
 
         pj.painelPersonagemInventario = new JPanel();
-        pj.painelPersonagemInventario.setBounds(550, 80, 600, 700);
-        pj.painelPersonagemInventario.setBackground(Color.yellow);
+        pj.painelPersonagemInventario.setBounds(450, 100, 600, 600);
+        pj.painelPersonagemInventario.setBackground(Color.black);
         pj.painelPersonagemInventario.setForeground(Color.white);
         pj.painelPersonagemInventario.setLayout(new GridLayout(5, 1));
         pj.painelPersonagemInventario.setFont(pj.fontePadrao);
@@ -401,12 +402,13 @@ public class Jogo extends JFrame{
         pj.painelPersonagemInventario.setVisible(false);
 
         pj.painelPersonagemBotaoVoltarInventario = new JPanel();
-        pj.painelPersonagemBotaoVoltarInventario.setBounds(550, 830, 200, 50);
-        pj.painelPersonagemBotaoVoltarInventario.setBackground(Color.red);
+        pj.painelPersonagemBotaoVoltarInventario.setBounds(650, 700, 200, 50);
+        pj.painelPersonagemBotaoVoltarInventario.setBackground(Color.black);
         
         pj.personagemBotaoVoltarInventario = new JButton("VOLTAR");
         pj.configurarBotao(pj.personagemBotaoVoltarInventario);
-        pj.personagemBotaoInventario.addActionListener(e -> {
+        pj.personagemBotaoVoltarInventario.addActionListener(e -> {
+            System.out.println("Executando metodo...");
             voltarPainelJogo();
         });
 
@@ -451,11 +453,42 @@ public class Jogo extends JFrame{
         pj.painelTextoPadrao.setVisible(true);
 
         pj.con.add(pj.playerPanel);
+        pj.con.add(pj.painelTituloPersonagemInventario);
+        pj.con.add(pj.painelPersonagemInventario);
+        pj.con.add(pj.painelPersonagemBotaoVoltarInventario);
         pj.con.add(pj.painelImagemComodo);
         pj.con.add(pj.painelBotaoProximoInGame);
         pj.con.add(pj.painelTextoPadrao);
 
         pj.con.repaint();
+    }
+
+    public void telaApartamento(){
+
+    }
+
+    public void telaSala(){
+
+    }
+
+    public void telaCozinha(){
+        
+    }
+
+    public void telaQuarto(){
+
+    }
+
+    public void telaBanheiro(){
+
+    }
+
+    public void telaAutoestima(){
+
+    }
+
+    public void telaChefe(){
+        
     }
 
     public void abrirInventario(){
