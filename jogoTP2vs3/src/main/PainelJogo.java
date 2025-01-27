@@ -225,21 +225,27 @@ public class PainelJogo {
 
         painelBotaoPersonagemLohan.setVisible(false);
 
+        // MENU DO JOGO
         con.add(painelTitulo);
         con.add(painelBotaoStart);
         con.add(painelBotaoConfig);
         con.add(painelBotaoPontuacoes);
-        con.add(painelBotaoProximoInGame);
 
+        // BOTOES DE VOLTAR PARA O MENU NOS MISC DO JOGO
         con.add(painelBotaoVoltarConfig);
         con.add(painelBotaoVoltarPontuacoes);
         con.add(painelBotaoVoltarIniciar);
 
+        // BOTOES DE AUMENTAR E DIMINUIR VOLUME DAS CONFIG
         con.add(painelBotaoAumentarVol);
         con.add(painelBotaoDiminuirVol);
 
+        // BOTOES DE SELECAO DE PERSONAGEM DA PAGINA DE INICIO DO JOGO(!= DO MENU)
         con.add(painelBotaoPersonagemKalrok);
         con.add(painelBotaoPersonagemLohan);
+
+        // BOTAO DE PASSAR PARA O PROXIMO DIALOGO QUE OCORRERA IN-GAME
+        con.add(painelBotaoProximoInGame);
 
         jf.setVisible(true);
     }
@@ -249,11 +255,12 @@ public class PainelJogo {
         painelBotaoStart.setVisible(true);
         painelBotaoConfig.setVisible(true);
         painelBotaoPontuacoes.setVisible(true);
-        painelBotaoConfig.setVisible(false);
-        painelBotaoPontuacoes.setVisible(false);
         painelBotaoVoltarIniciar.setVisible(false);
+        painelBotaoVoltarConfig.setVisible(false);
         painelBotaoPersonagemKalrok.setVisible(false);
         painelBotaoPersonagemLohan.setVisible(false);
+        painelBotaoAumentarVol.setVisible(false);
+        painelBotaoDiminuirVol.setVisible(false);
     }
 
     public void criarTelaJogo(){
@@ -340,6 +347,7 @@ public class PainelJogo {
             novoVolume = Math.max(novoVolume, volumeControl.getMinimum());
 
             volumeControl.setValue(novoVolume);
+            System.out.println("Volume ajustado: " + valor);
         }
     }
 }

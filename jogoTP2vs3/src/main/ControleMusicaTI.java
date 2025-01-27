@@ -3,6 +3,7 @@ package main;
 import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.FloatControl;
 import javax.swing.JOptionPane;
 
 public class ControleMusicaTI{
@@ -19,7 +20,11 @@ public class ControleMusicaTI{
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(arquivo);
             pj.clip = AudioSystem.getClip();
             pj.clip.open(audioStream);
+
+            pj.volumeControl = (FloatControl) pj.clip.getControl(FloatControl.Type.MASTER_GAIN);
+
             pj.clip.start();
+            pj.clip.loop(5);
         }catch(Exception e){
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro ao tocar a música: " + e.getMessage());

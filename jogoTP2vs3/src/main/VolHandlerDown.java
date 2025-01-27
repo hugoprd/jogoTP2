@@ -12,7 +12,8 @@ public class VolHandlerDown implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e){
-        pj.ajustarVolume(1);
+        System.out.println("ajustando volume..");
+        pj.ajustarVolume(-2);
     }
     
 }
