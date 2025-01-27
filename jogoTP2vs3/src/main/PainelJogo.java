@@ -1,9 +1,12 @@
 package main;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class PainelJogo {
     JFrame jf;
@@ -17,6 +20,8 @@ public class PainelJogo {
     // in-game
     JPanel painelTextoPadrao;
     JPanel painelBotaoProximoInGame;
+    // player
+    JPanel playerPanel;
     // cenas
     JPanel painelImagemApartamento, painelImagemSala, painelImagemCozinha, painelImagemQuarto, painelImagemBanheiro;
     JPanel painelImagemAutoestima, painelImagemChefe;
@@ -44,13 +49,15 @@ public class PainelJogo {
     // aumentar diminuir volume
     VolHandlerUp vhu = new VolHandlerUp(this);
     VolHandlerDown vhd = new VolHandlerDown(this);
+    // som de click
+    public ClickSoundHandler csh = new ClickSoundHandler(this);
     // pontuacao
     PontuacaoHandler ph = new PontuacaoHandler(this);
     // start handler: kalrok || lohan
     StartHandlerK shk = new StartHandlerK(this);
     StartHandlerL shl = new StartHandlerL(this);
 
-    public Clip clip;
+    public Clip clip, clip2, clipClickSound;
     public FloatControl volumeControl;
 
     ControleMusicaTI cmti = new ControleMusicaTI(this);
@@ -219,19 +226,6 @@ public class PainelJogo {
 
         painelBotaoPersonagemLohan.setVisible(false);
 
-        // BOTAO PROXIMO IN-GAME
-        painelBotaoProximoInGame = new JPanel();
-        painelBotaoProximoInGame.setBounds(650, 500, 200, 50);
-        painelBotaoProximoInGame.setBackground(Color.black);
-
-        botaoProximoInGame = new JButton(">");
-        configurarBotao(botaoProximoInGame);
-        botaoProximoInGame.addActionListener(tsh);
-
-        painelBotaoProximoInGame.add(botaoProximoInGame);
-
-        painelBotaoProximoInGame.setVisible(false);
-
         // MENU DO JOGO
         con.add(painelTitulo);
         con.add(painelBotaoStart);
@@ -251,9 +245,6 @@ public class PainelJogo {
         con.add(painelBotaoPersonagemKalrok);
         con.add(painelBotaoPersonagemLohan);
 
-        // BOTAO DE PASSAR PARA O PROXIMO DIALOGO QUE OCORRERA IN-GAME
-        con.add(painelBotaoProximoInGame);
-
         jf.setVisible(true);
     }
 
@@ -269,6 +260,9 @@ public class PainelJogo {
         painelBotaoAumentarVol.setVisible(false);
         painelBotaoDiminuirVol.setVisible(false);
         painelTituloTabPontuacoes.setVisible(false);
+        if(playerPanel != null){
+            playerPanel.setVisible(false);
+        }
     }
 
     public void criarTelaJogo(){
@@ -281,7 +275,12 @@ public class PainelJogo {
         painelBotaoVoltarIniciar.setVisible(true);
         painelBotaoPersonagemKalrok.setVisible(true);
         painelBotaoPersonagemLohan.setVisible(true);
-        painelTituloTabPontuacoes.setVisible(false);
+        if(painelTituloTabPontuacoes != null){
+            painelTituloTabPontuacoes.setVisible(false);
+        }
+        if(playerPanel != null){
+            playerPanel.setVisible(false);
+        }
     }
 
     public void iniciarJogo(String personagem){
@@ -294,22 +293,45 @@ public class PainelJogo {
         painelBotaoVoltarIniciar.setVisible(false);
         painelBotaoPersonagemKalrok.setVisible(false);
         painelBotaoPersonagemLohan.setVisible(false);
-        painelTituloTabPontuacoes.setVisible(false);
+        if(painelTituloTabPontuacoes != null){
+            painelTituloTabPontuacoes.setVisible(false);
+        }
+
+        // PARTE DE CIMA: STATUS DO PLAYER
+        playerPanel = new JPanel();
+        playerPanel.setBounds(0, 0, larguraTJ, 50);
+        playerPanel.setBackground(Color.blue);
+        playerPanel.setLayout(new GridLayout(1, 4));
+
+        playerPanel.setVisible(true);
 
         // IMAGEM DA CENA PARTE DE CIMA/MEIO
         painelImagemApartamento = new JPanel();
-        painelImagemApartamento.setBounds(0, 0, larguraTJ, 100);
+        painelImagemApartamento.setBounds(0, 50, larguraTJ, 400);
         painelImagemApartamento.setBackground(Color.white);
 
         painelImagemApartamento.setVisible(true);
 
+        // PARTE DO MEIO: BOTAO PROXIMO
+        painelBotaoProximoInGame = new JPanel();
+        painelBotaoProximoInGame.setBounds(650, 455, 50, 40);
+        painelBotaoProximoInGame.setBackground(Color.black);
+
+        botaoProximoInGame = new JButton(">");
+        configurarBotao(botaoProximoInGame);
+        //botaoProximoInGame.addActionListener(tsh);
+
+        painelBotaoProximoInGame.add(botaoProximoInGame);
+
+        painelBotaoProximoInGame.setVisible(true);
+
         // TEXTO PARTE DEBAIXO DO JOGO
         painelTextoPadrao = new JPanel();
-        painelTextoPadrao.setBounds(0, 500, larguraTJ, 400);
+        painelTextoPadrao.setBounds(0, 500, larguraTJ, 700);
         painelTextoPadrao.setBackground(Color.gray);
 
         areaTextoPadrao = new JTextArea("olá teste");
-        areaTextoPadrao.setBounds(0, 500, larguraTJ, 400);
+        areaTextoPadrao.setBounds(35, 500, larguraTJ - 35, 700);
         areaTextoPadrao.setBackground(Color.gray);
         areaTextoPadrao.setForeground(Color.white);
         areaTextoPadrao.setFont(fontePadrao);
@@ -319,8 +341,12 @@ public class PainelJogo {
 
         painelTextoPadrao.setVisible(true);
 
+        con.add(playerPanel);
         con.add(painelImagemApartamento);
+        con.add(painelBotaoProximoInGame);
         con.add(painelTextoPadrao);
+
+        con.repaint();
     }
 
     public void abrirConfigs(){
@@ -331,7 +357,12 @@ public class PainelJogo {
         painelBotaoVoltarConfig.setVisible(true);
         painelBotaoAumentarVol.setVisible(true);
         painelBotaoDiminuirVol.setVisible(true);
-        painelTituloTabPontuacoes.setVisible(false);
+        if(painelTituloTabPontuacoes != null){
+            painelTituloTabPontuacoes.setVisible(false);
+        }
+        if(playerPanel != null){
+            playerPanel.setVisible(false);
+        }
     }
 
     public void abrirPontuacoes(){
@@ -343,6 +374,9 @@ public class PainelJogo {
         painelBotaoAumentarVol.setVisible(false);
         painelBotaoDiminuirVol.setVisible(false);
         painelBotaoVoltarPontuacoes.setVisible(true);
+        if(playerPanel != null){
+            playerPanel.setVisible(false);
+        }
 
         // titulo tabela
         painelTituloTabPontuacoes = new JPanel();

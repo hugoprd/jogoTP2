@@ -12,6 +12,7 @@ public class TitleScreenHandlerB implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e){
+        pj.csh.tocarClickSound();
         pj.abrirMenu();
     }
     

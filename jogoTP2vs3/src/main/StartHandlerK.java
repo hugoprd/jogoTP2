@@ -12,6 +12,7 @@ public class StartHandlerK implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e){
+        pj.csh.tocarClickSound();
         pj.iniciarJogo("kalrok");
     }
     

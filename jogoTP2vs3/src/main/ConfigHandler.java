@@ -12,6 +12,7 @@ public class ConfigHandler implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e){
+        pj.csh.tocarClickSound();
         pj.abrirConfigs();
     }
     
