@@ -249,7 +249,7 @@ public class PainelJogo {
 
         // TELA BOTAR NOME
         painelTituloNomeJogador = new JPanel();
-        painelTituloNomeJogador.setBounds(500, 50, 500, 100);
+        painelTituloNomeJogador.setBounds(0, 50, larguraTJ, 100);
         painelTituloNomeJogador.setBackground(Color.black);
         painelTituloNomeJogador.setForeground(Color.white);
 
@@ -458,6 +458,10 @@ public class PainelJogo {
             painelTituloTabPontuacoes.setVisible(false);
         }
         painelTituloEscolherPersonagem.setVisible(false);
+
+        clip.stop();
+        clip2.start();
+        clip2.loop(10);
 
         jogo.definirPersonagem(nomePersonagem);
         jogo.telaPadraoJogo();

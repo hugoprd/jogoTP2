@@ -31,7 +31,8 @@ public class Jogo extends JFrame{
                                                                                                         // pé de cabra para abrir
     int escalaXY = 128 * 3;
     
-    Color corKalrok = Color.decode("");
+    Color corKalrok = Color.decode("#c04849");
+    Color corLohan = Color.decode("#480049");
 
     public Jogo(PainelJogo pj){
         this.pj = pj;
@@ -482,12 +483,22 @@ public class Jogo extends JFrame{
         // TEXTO PARTE DEBAIXO DO JOGO
         pj.painelTextoPadrao = new JPanel();
         pj.painelTextoPadrao.setBounds(0, 500, pj.larguraTJ, 700);
-        pj.painelTextoPadrao.setBackground(Color.black);
+        if(protagonista.getNome().equals("kalrok")){
+            pj.painelTextoPadrao.setBackground(corKalrok);
+        }
+        else if(protagonista.getNome().equals("lohan")){
+            pj.painelTextoPadrao.setBackground(corLohan);
+        }
         pj.painelTextoPadrao.setBorder(BorderFactory.createLineBorder(Color.white, 3));
 
         pj.areaTextoPadrao = new JTextArea("olá teste");
         pj.areaTextoPadrao.setBounds(35, 500, pj.larguraTJ - 35, 700);
-        pj.areaTextoPadrao.setBackground(Color.black);
+        if(protagonista.getNome().equals("kalrok")){
+            pj.areaTextoPadrao.setBackground(corKalrok);
+        }
+        else if(protagonista.getNome().equals("lohan")){
+            pj.areaTextoPadrao.setBackground(corLohan);
+        }
         pj.areaTextoPadrao.setForeground(Color.white);
         pj.areaTextoPadrao.setFont(pj.fontePadrao);
         pj.areaTextoPadrao.setLineWrap(true); //texto vai pra baixo automaticamente
