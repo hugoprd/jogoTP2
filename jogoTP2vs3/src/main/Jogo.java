@@ -57,12 +57,19 @@ public class Jogo extends JFrame{
         pj.bpigh.escreverFrases(e, protagonista.getNome(), 3);
         if(pj.bpigh.indiceAtual == 16){
             pj.bpigh.indiceAtual = 0;
+            pj.posicao = "comoda";
             pj.painelEscolhas.setVisible(true);
         }
     };
 
     ActionListener escreverCena3Comoda = e -> {
+        pj.painelEscolhas.setVisible(false);
         pj.bpigh.escreverFrases(e, protagonista.getNome(), 4);
+        if(pj.bpigh.indiceAtual == 3){
+            pj.bpigh.indiceAtual = 0;
+            pj.painelEscolharSimNao.setVisible(true);
+            //pj.areaTextoPadrao.setText("*(e agora?)*");
+        }
     };
 
     public Jogo(PainelJogo pj){
@@ -529,6 +536,10 @@ public class Jogo extends JFrame{
         pj.areaTextoPadrao.setFont(pj.fontePadrao);
         pj.areaTextoPadrao.setLineWrap(true); //texto vai pra baixo automaticamente
 
+        pj.painelTextoPadrao.add(pj.areaTextoPadrao);
+
+        pj.painelTextoPadrao.setVisible(true);
+
         pj.painelEscolhas = new JPanel();
         pj.painelEscolhas.setOpaque(false);
         pj.painelEscolhas.setLayout(new GridLayout(1, 6));
@@ -559,12 +570,25 @@ public class Jogo extends JFrame{
         pj.painelEscolhas.add(pj.escolha6);
 
         pj.painelEscolhas.setVisible(false);
-        
-        pj.painelTextoPadrao.add(pj.areaTextoPadrao);
 
         pj.painelTextoPadrao.add(pj.painelEscolhas, BorderLayout.SOUTH);
 
-        pj.painelTextoPadrao.setVisible(true);
+        pj.painelEscolharSimNao = new JPanel();
+        pj.painelEscolharSimNao.setOpaque(false);
+        pj.painelEscolharSimNao.setLayout(new GridLayout(1, 2));
+
+        pj.escolhaBS = new JButton("SIM");
+        pj.configurarBotao(pj.escolhaBS);
+
+        pj.escolhaBN = new JButton("NÃO");
+        pj.configurarBotao(pj.escolhaBN);
+
+        pj.painelEscolharSimNao.add(pj.escolhaBS);
+        pj.painelEscolharSimNao.add(pj.escolhaBN);
+
+        pj.painelEscolharSimNao.setVisible(false);
+
+        pj.painelTextoPadrao.add(pj.painelEscolharSimNao, BorderLayout.SOUTH);
 
         pj.con.add(pj.playerPanel);
         pj.con.add(pj.painelTituloPersonagemInventario);
@@ -580,12 +604,14 @@ public class Jogo extends JFrame{
     }
 
     public void telaComecoJogo(){
+        pj.posicao = "comeco";
         pj.botaoProximoInGame.addActionListener(escreverCena1); // botao proximo handler
 
         pj.con.repaint();
     }
 
     public void telaApartamento(){
+        pj.posicao = "apartamento";
         ControleMusicaTJ cmtj = new ControleMusicaTJ(pj);
         pj.clip2.start();
         pj.clip2.loop(50);
@@ -624,6 +650,7 @@ public class Jogo extends JFrame{
     }
 
     public void telaSala(){
+        pj.posicao = "sala";
         pj.areaTextoPadrao.setText("");
         pj.painelImagemApartamento.setVisible(false);
 

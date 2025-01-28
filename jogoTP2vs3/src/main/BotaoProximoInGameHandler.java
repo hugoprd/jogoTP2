@@ -69,6 +69,12 @@ public class BotaoProximoInGameHandler{
 
         if(indiceAtual < 13){
             pj.areaTextoPadrao.setText(frases.get(indiceAtual));
+            if(indiceAtual == 1 || indiceAtual == 3 || (indiceAtual >= 5 && indiceAtual <= 7) || indiceAtual == 9 || indiceAtual == 11){
+                pj.skh.tocarSomTexto();
+            }
+            else if(indiceAtual == 0 || indiceAtual == 2 || indiceAtual == 4 || indiceAtual == 8 || indiceAtual == 10 || indiceAtual == 12){
+                pj.slh.tocarSomTexto();
+            }
             //pj.sah.tocarSomTexto();
             pj.con.repaint();
         }
@@ -86,10 +92,10 @@ public class BotaoProximoInGameHandler{
         }
 
         if(nome.equals("kalrok")){
-            carregarFrases("/lib/cenas/cena2/cena3Kalrok.txt");
+            carregarFrases("/lib/cenas/cena3/cena3Kalrok.txt");
         }
         else if(nome.equals("lohan")){
-            carregarFrases("/lib/cenas/cena2/cena3Lohan.txt");
+            carregarFrases("/lib/cenas/cena3/cena3Lohan.txt");
         }
 
         System.out.println(frases.size());
@@ -113,10 +119,10 @@ public class BotaoProximoInGameHandler{
         }
 
         if(nome.equals("kalrok")){
-            carregarFrases("/lib/cenas/cena2/cena3ComodaKalrok.txt");
+            carregarFrases("/lib/cenas/cena3/cena3ComodaKalrok.txt");
         }
         else if(nome.equals("lohan")){
-            carregarFrases("/lib/cenas/cena2/cena3ComodaLohan.txt");
+            carregarFrases("/lib/cenas/cena3/cena3ComodaLohan.txt");
         }
 
         System.out.println(frases.size());
@@ -140,10 +146,10 @@ public class BotaoProximoInGameHandler{
         }
 
         if(nome.equals("kalrok")){
-            carregarFrases("/lib/cenas/cena2/cena3Comoda2Kalrok.txt");
+            carregarFrases("/lib/cenas/cena3/cena3Comoda2Kalrok.txt");
         }
         else if(nome.equals("lohan")){
-            carregarFrases("/lib/cenas/cena2/cena3Comoda2Lohan.txt");
+            carregarFrases("/lib/cenas/cena3/cena3Comoda2Lohan.txt");
         }
 
         System.out.println(frases.size());
@@ -167,10 +173,10 @@ public class BotaoProximoInGameHandler{
         }
 
         if(nome.equals("kalrok")){
-            carregarFrases("/lib/cenas/cena2/cena3PocaKalrok.txt");
+            carregarFrases("/lib/cenas/cena3/cena3PocaKalrok.txt");
         }
         else if(nome.equals("lohan")){
-            carregarFrases("/lib/cenas/cena2/cena3PocaLohan.txt");
+            carregarFrases("/lib/cenas/cena3/cena3PocaLohan.txt");
         }
 
         System.out.println(frases.size());
@@ -194,10 +200,10 @@ public class BotaoProximoInGameHandler{
         }
 
         if(nome.equals("kalrok")){
-            carregarFrases("/lib/cenas/cena2/cena3PocaKalrok.txt");
+            carregarFrases("/lib/cenas/cena3/cena3PocaKalrok.txt");
         }
         else if(nome.equals("lohan")){
-            carregarFrases("/lib/cenas/cena2/cena3PocaLohan.txt");
+            carregarFrases("/lib/cenas/cena3/cena3PocaLohan.txt");
         }
 
         System.out.println(frases.size());

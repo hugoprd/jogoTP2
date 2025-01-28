@@ -44,7 +44,7 @@ public class PainelJogo {
     // player
     JPanel playerPanel;
     JPanel painelTituloPersonagemInventario, painelPersonagemInventario, painelPersonagemBotaoVoltarInventario;
-    JPanel painelEscolhas;
+    JPanel painelEscolhas, painelEscolharSimNao;
     // cenas
     JPanel painelImagemComodo, painelImagemApartamento, painelImagemSala, painelImagemCozinha, painelImagemQuarto, painelImagemBanheiro;
     JPanel painelImagemAutoestima, painelImagemChefe;
@@ -74,7 +74,7 @@ public class PainelJogo {
     JButton botaoPersonagemKalrok, botaoPersonagemLohan;
     JButton botaoAumentarVol, botaoDiminuirVol;
     JButton personagemBotaoUsarHabilidade, personagemBotaoInventario, personagemBotaoVoltarInventario;
-    JButton escolha1, escolha2, escolha3, escolha4, escolha5, escolha6;
+    JButton escolha1, escolha2, escolha3, escolha4, escolha5, escolha6, escolhaBS, escolhaBN;
 
     // menu
     TitleScreenHandler tsh = new TitleScreenHandler(this);
@@ -103,6 +103,7 @@ public class PainelJogo {
 
     // som texto personagens
     SomKalrokHandler skh = new SomKalrokHandler(this);
+    SomLohanHandler slh = new SomLohanHandler(this);
     SomAutoestimaHandler sah = new SomAutoestimaHandler(this);
 
     // TELA JOGO
