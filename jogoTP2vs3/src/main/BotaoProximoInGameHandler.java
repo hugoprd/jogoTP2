@@ -46,7 +46,7 @@ public class BotaoProximoInGameHandler{
             pj.sah.tocarSomTexto();
             pj.con.repaint();
         }
-        else if(indiceAtual == 6){
+        else if(indiceAtual == (frases.size() + 1)){
             indiceAtual = 0;
         }
         indiceAtual++;
@@ -67,7 +67,7 @@ public class BotaoProximoInGameHandler{
 
         System.out.println(frases.size());
 
-        if(indiceAtual < 13){
+        if(indiceAtual < frases.size()){
             pj.areaTextoPadrao.setText(frases.get(indiceAtual));
             if(indiceAtual == 1 || indiceAtual == 3 || (indiceAtual >= 5 && indiceAtual <= 7) || indiceAtual == 9 || indiceAtual == 11){
                 pj.skh.tocarSomTexto();
@@ -100,9 +100,14 @@ public class BotaoProximoInGameHandler{
 
         System.out.println(frases.size());
 
-        if(indiceAtual < 13){
+        if(indiceAtual < frases.size()){
             pj.areaTextoPadrao.setText(frases.get(indiceAtual));
-            //pj.sah.tocarSomTexto();
+            if(indiceAtual <= 3 || indiceAtual == 5 || (indiceAtual >= 7 && indiceAtual <= 10) || indiceAtual == 12 || indiceAtual == 14){
+                pj.skh.tocarSomTexto();
+            }
+            else{
+                pj.slh.tocarSomTexto();
+            }
             pj.con.repaint();
         }
         else if(indiceAtual == (frases.size() + 1)){

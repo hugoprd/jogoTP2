@@ -35,6 +35,9 @@ public class Jogo extends JFrame{
     Color corKalrok = Color.decode("#c04849");
     Color corLohan = Color.decode("#480049");
 
+    boolean salaVisitado = false, cozinhaVisitado = false, quartoVisitado = false, banheiroVisitado = false;
+    boolean comodaVisitada = false, poltronaVisitada = false, pocaVisitada = false;
+
     ActionListener escreverCena1 = e -> {
         pj.bpigh.escreverFrases(e, protagonista.getNome(), 1);
         if(pj.bpigh.indiceAtual == 6){
@@ -55,14 +58,10 @@ public class Jogo extends JFrame{
 
     ActionListener escreverCena3 = e -> {
         pj.bpigh.escreverFrases(e, protagonista.getNome(), 3);
-        if(pj.bpigh.indiceAtual == 16){
-            pj.bpigh.indiceAtual = 0;
-            pj.posicao = "comoda";
-            pj.painelEscolhas.setVisible(true);
-        }
     };
 
     ActionListener escreverCena3Comoda = e -> {
+        pj.csh.tocarClickSound();
         pj.painelEscolhas.setVisible(false);
         pj.bpigh.escreverFrases(e, protagonista.getNome(), 4);
         if(pj.bpigh.indiceAtual == 3){
@@ -70,6 +69,37 @@ public class Jogo extends JFrame{
             pj.painelEscolharSimNao.setVisible(true);
             //pj.areaTextoPadrao.setText("*(e agora?)*");
         }
+    };
+
+    ActionListener escreverCena3Poltrona = e -> {
+        pj.painelEscolhas.setVisible(false);
+        pj.bpigh.escreverFrases(e, protagonista.getNome(), 5);
+        if(pj.bpigh.indiceAtual == 16){
+            pj.bpigh.indiceAtual = 0;
+        }
+    };
+
+    ActionListener escreverCena3Poca = e -> {
+        pj.painelEscolhas.setVisible(false);
+        pj.bpigh.escreverFrases(e, protagonista.getNome(), 6);
+        if(pj.bpigh.indiceAtual == 16){
+            pj.bpigh.indiceAtual = 0;
+        }
+    };
+
+    ActionListener escreverCena4 = e -> {
+        pj.csh.tocarClickSound();
+        telaCozinha();
+    };
+
+    ActionListener escreverCena5 = e -> {
+        pj.csh.tocarClickSound();
+        telaQuarto();
+    };
+
+    ActionListener escreverCena6 = e -> {
+        pj.csh.tocarClickSound();
+        telaBanheiro();
     };
 
     public Jogo(PainelJogo pj){
@@ -677,7 +707,22 @@ public class Jogo extends JFrame{
         pj.painelImagemComodo.repaint();
 
         pj.botaoProximoInGame.removeActionListener(escreverCena2);
-        pj.botaoProximoInGame.addActionListener(escreverCena3); // botao proximo handler
+        if(salaVisitado != true){
+            pj.botaoProximoInGame.addActionListener(escreverCena3); // botao proximo handler
+        }
+        if(pj.bpigh.indiceAtual == 15 || salaVisitado == true){
+            pj.bpigh.indiceAtual = 0;
+            pj.botaoProximoInGame.setVisible(false);
+            //pj.botaoProximoInGame.removeActionListener(escreverCena3);
+            pj.painelEscolhas.setVisible(true);
+            pj.escolha1.addActionListener(escreverCena4);
+            pj.escolha2.addActionListener(escreverCena5);
+            pj.escolha3.addActionListener(escreverCena6);
+            pj.escolha4.addActionListener(escreverCena3Comoda);
+            pj.escolha5.addActionListener(escreverCena3Poltrona);
+            pj.escolha6.addActionListener(escreverCena3Poca);
+            salaVisitado = true;
+        }
 
         pj.con.revalidate();
         pj.con.repaint();
@@ -685,10 +730,15 @@ public class Jogo extends JFrame{
 
     // AS OPCOES DA SALA
     public void telaComoda(){
-
+        pj.posicao = "comoda";
+        pj.botaoProximoInGame.setVisible(true);
+        pj.botaoProximoInGame.removeActionListener(escreverCena3);
+        pj.botaoProximoInGame.addActionListener(escreverCena3Comoda);
     }
 
     public void telaPoltrona(){
+        pj.posicao = "poltrona";
+        pj.botaoProximoInGame.setVisible(true);
 
     }
 
