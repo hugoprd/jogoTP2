@@ -67,28 +67,178 @@ public class BotaoProximoInGameHandler{
 
         System.out.println(frases.size());
 
-        if(indiceAtual < 12){
+        if(indiceAtual < 13){
             pj.areaTextoPadrao.setText(frases.get(indiceAtual));
             //pj.sah.tocarSomTexto();
-            indiceAtual++;
             pj.con.repaint();
-            System.out.println("na cena 2: " + indiceAtual);
         }
         else if(indiceAtual == (frases.size() + 1)){
             indiceAtual = 0;
         }
-        System.out.println(indiceAtual);
+        indiceAtual++;
+        System.out.println("na cena 2: " + indiceAtual);
+        //System.out.println(indiceAtual);
+    }
+
+    public void carregarCena3(String nome){
+        if(frases != null){
+            frases.clear();
+        }
+
+        if(nome.equals("kalrok")){
+            carregarFrases("/lib/cenas/cena2/cena3Kalrok.txt");
+        }
+        else if(nome.equals("lohan")){
+            carregarFrases("/lib/cenas/cena2/cena3Lohan.txt");
+        }
+
+        System.out.println(frases.size());
+
+        if(indiceAtual < 13){
+            pj.areaTextoPadrao.setText(frases.get(indiceAtual));
+            //pj.sah.tocarSomTexto();
+            pj.con.repaint();
+        }
+        else if(indiceAtual == (frases.size() + 1)){
+            indiceAtual = 0;
+        }
+        indiceAtual++;
+        System.out.println("na cena 2: " + indiceAtual);
+        //System.out.println(indiceAtual);
+    }
+
+    public void carregarCena4(String nome){
+        if(frases != null){
+            frases.clear();
+        }
+
+        if(nome.equals("kalrok")){
+            carregarFrases("/lib/cenas/cena2/cena3ComodaKalrok.txt");
+        }
+        else if(nome.equals("lohan")){
+            carregarFrases("/lib/cenas/cena2/cena3ComodaLohan.txt");
+        }
+
+        System.out.println(frases.size());
+
+        if(indiceAtual < 2){
+            pj.areaTextoPadrao.setText(frases.get(indiceAtual));
+            //pj.sah.tocarSomTexto();
+            pj.con.repaint();
+        }
+        else if(indiceAtual == 3){
+            indiceAtual = 0;
+        }
+        indiceAtual++;
+        System.out.println("na cena 3: comoda: " + indiceAtual);
+        //System.out.println(indiceAtual);
+    }
+
+    public void carregarCena5(String nome){
+        if(frases != null){
+            frases.clear();
+        }
+
+        if(nome.equals("kalrok")){
+            carregarFrases("/lib/cenas/cena2/cena3Comoda2Kalrok.txt");
+        }
+        else if(nome.equals("lohan")){
+            carregarFrases("/lib/cenas/cena2/cena3Comoda2Lohan.txt");
+        }
+
+        System.out.println(frases.size());
+
+        if(indiceAtual < 7){
+            pj.areaTextoPadrao.setText(frases.get(indiceAtual));
+            //pj.sah.tocarSomTexto();
+            pj.con.repaint();
+        }
+        else if(indiceAtual == 8){
+            indiceAtual = 0;
+        }
+        indiceAtual++;
+        System.out.println("na cena 3: comoda 2: " + indiceAtual);
+        //System.out.println(indiceAtual);
+    }
+
+    public void carregarCena6(String nome){
+        if(frases != null){
+            frases.clear();
+        }
+
+        if(nome.equals("kalrok")){
+            carregarFrases("/lib/cenas/cena2/cena3PocaKalrok.txt");
+        }
+        else if(nome.equals("lohan")){
+            carregarFrases("/lib/cenas/cena2/cena3PocaLohan.txt");
+        }
+
+        System.out.println(frases.size());
+
+        if(indiceAtual < 13){
+            pj.areaTextoPadrao.setText(frases.get(indiceAtual));
+            //pj.sah.tocarSomTexto();
+            pj.con.repaint();
+        }
+        else if(indiceAtual == (frases.size() + 1)){
+            indiceAtual = 0;
+        }
+        indiceAtual++;
+        System.out.println("na cena 2: " + indiceAtual);
+        //System.out.println(indiceAtual);
+    }
+
+    public void carregarCena7(String nome){
+        if(frases != null){
+            frases.clear();
+        }
+
+        if(nome.equals("kalrok")){
+            carregarFrases("/lib/cenas/cena2/cena3PocaKalrok.txt");
+        }
+        else if(nome.equals("lohan")){
+            carregarFrases("/lib/cenas/cena2/cena3PocaLohan.txt");
+        }
+
+        System.out.println(frases.size());
+
+        if(indiceAtual < 13){
+            pj.areaTextoPadrao.setText(frases.get(indiceAtual));
+            //pj.sah.tocarSomTexto();
+            pj.con.repaint();
+        }
+        else if(indiceAtual == (frases.size() + 1)){
+            indiceAtual = 0;
+        }
+        indiceAtual++;
+        System.out.println("na cena 2: " + indiceAtual);
+        //System.out.println(indiceAtual);
     }
 
     public void escreverFrases(ActionEvent e, String nome, int cena){
         pj.csh.tocarClickSound();
         //System.out.println("Diretório atual: " + System.getProperty("user.dir"));
         
-        if(cena == 1){
+        if(cena == 1){ // cena 3
             carregarCena1(nome);
         }
-        else if(cena == 2){
+        else if(cena == 2){ // cena 2
             carregarCena2(nome);
+        }
+        else if(cena == 3){ // cena 3
+            carregarCena3(nome);
+        }
+        else if(cena == 4){ // cena 3: comoda
+            carregarCena4(nome);
+        }
+        else if(cena == 5){ // cena 3: comoda 2: aceitou investigar
+            carregarCena5(nome);
+        }
+        else if(cena == 6){ // cena 3: poltrona
+            carregarCena6(nome);
+        }
+        else if(cena == 7){ // cena 3: poltrona 2: aceitou investigar
+            carregarCena7(nome);
         }
     }
     

@@ -23,6 +23,8 @@ public class PainelJogo {
     long tempoInicial = System.currentTimeMillis();
     long tempoFinal;
     long tempoTotal = tempoInicial - tempoFinal;
+
+    String posicao = "";
     //long segundos = (tempoTotal / 1000) % 60;
     //long minutos = (tempoTotal / (1000 * 60)) % 60;
     //long horas = (tempoTotal / (1000 * 60 * 60)) % 24;
@@ -42,6 +44,7 @@ public class PainelJogo {
     // player
     JPanel playerPanel;
     JPanel painelTituloPersonagemInventario, painelPersonagemInventario, painelPersonagemBotaoVoltarInventario;
+    JPanel painelEscolhas;
     // cenas
     JPanel painelImagemComodo, painelImagemApartamento, painelImagemSala, painelImagemCozinha, painelImagemQuarto, painelImagemBanheiro;
     JPanel painelImagemAutoestima, painelImagemChefe;
@@ -71,6 +74,7 @@ public class PainelJogo {
     JButton botaoPersonagemKalrok, botaoPersonagemLohan;
     JButton botaoAumentarVol, botaoDiminuirVol;
     JButton personagemBotaoUsarHabilidade, personagemBotaoInventario, personagemBotaoVoltarInventario;
+    JButton escolha1, escolha2, escolha3, escolha4, escolha5, escolha6;
 
     // menu
     TitleScreenHandler tsh = new TitleScreenHandler(this);

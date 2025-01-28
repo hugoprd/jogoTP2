@@ -46,11 +46,23 @@ public class Jogo extends JFrame{
 
     ActionListener escreverCena2 = e -> {
         pj.bpigh.escreverFrases(e, protagonista.getNome(), 2);
-        if(pj.bpigh.indiceAtual == 12){
+        if(pj.bpigh.indiceAtual == 14){
             //System.out.println("entrou");
             pj.bpigh.indiceAtual = 0;
             telaSala();
         }
+    };
+
+    ActionListener escreverCena3 = e -> {
+        pj.bpigh.escreverFrases(e, protagonista.getNome(), 3);
+        if(pj.bpigh.indiceAtual == 16){
+            pj.bpigh.indiceAtual = 0;
+            pj.painelEscolhas.setVisible(true);
+        }
+    };
+
+    ActionListener escreverCena3Comoda = e -> {
+        pj.bpigh.escreverFrases(e, protagonista.getNome(), 4);
     };
 
     public Jogo(PainelJogo pj){
@@ -516,8 +528,41 @@ public class Jogo extends JFrame{
         pj.areaTextoPadrao.setForeground(Color.white);
         pj.areaTextoPadrao.setFont(pj.fontePadrao);
         pj.areaTextoPadrao.setLineWrap(true); //texto vai pra baixo automaticamente
+
+        pj.painelEscolhas = new JPanel();
+        pj.painelEscolhas.setOpaque(false);
+        pj.painelEscolhas.setLayout(new GridLayout(1, 6));
+
+        pj.escolha1 = new JButton("COZINHA");
+        pj.configurarBotao(pj.escolha1);
+        
+        pj.escolha2 = new JButton("QUARTO");
+        pj.configurarBotao(pj.escolha2);
+        
+        pj.escolha3 = new JButton("BANHEIRO");
+        pj.configurarBotao(pj.escolha3);
+
+        pj.escolha4 = new JButton("CÔMODA");
+        pj.configurarBotao(pj.escolha4);
+
+        pj.escolha5 = new JButton("POLTRONA");
+        pj.configurarBotao(pj.escolha5);
+
+        pj.escolha6 = new JButton("POÇA");
+        pj.configurarBotao(pj.escolha6);
+
+        pj.painelEscolhas.add(pj.escolha1);
+        pj.painelEscolhas.add(pj.escolha2);
+        pj.painelEscolhas.add(pj.escolha3);
+        pj.painelEscolhas.add(pj.escolha4);
+        pj.painelEscolhas.add(pj.escolha5);
+        pj.painelEscolhas.add(pj.escolha6);
+
+        pj.painelEscolhas.setVisible(false);
         
         pj.painelTextoPadrao.add(pj.areaTextoPadrao);
+
+        pj.painelTextoPadrao.add(pj.painelEscolhas, BorderLayout.SOUTH);
 
         pj.painelTextoPadrao.setVisible(true);
 
@@ -560,8 +605,9 @@ public class Jogo extends JFrame{
         labelCena.setVisible(true);
 
         pj.painelImagemApartamento = new JPanel();
+        pj.painelImagemApartamento.setOpaque(false);
 
-        pj.painelImagemApartamento.add(labelCena, BorderLayout.CENTER);
+        pj.painelImagemApartamento.add(labelCena);
 
         pj.painelImagemComodo.add(pj.painelImagemApartamento, BorderLayout.CENTER);
 
@@ -572,7 +618,6 @@ public class Jogo extends JFrame{
         pj.con.repaint();
 
         pj.botaoProximoInGame.removeActionListener(escreverCena1);
-
         pj.botaoProximoInGame.addActionListener(escreverCena2); // botao proximo handler
 
         pj.con.repaint();
@@ -594,13 +639,34 @@ public class Jogo extends JFrame{
         JLabel labelCena = new JLabel(imagemIcon);
         labelCena.setVisible(true);
 
-        pj.painelImagemComodo.add(labelCena, BorderLayout.CENTER);
+        pj.painelImagemSala = new JPanel();
+        pj.painelImagemSala.setOpaque(false);
+
+        pj.painelImagemSala.add(labelCena);
+
+        pj.painelImagemComodo.add(pj.painelImagemSala, BorderLayout.CENTER);
 
         pj.painelImagemComodo.revalidate();
         pj.painelImagemComodo.repaint();
 
+        pj.botaoProximoInGame.removeActionListener(escreverCena2);
+        pj.botaoProximoInGame.addActionListener(escreverCena3); // botao proximo handler
+
         pj.con.revalidate();
         pj.con.repaint();
+    }
+
+    // AS OPCOES DA SALA
+    public void telaComoda(){
+
+    }
+
+    public void telaPoltrona(){
+
+    }
+
+    public void telaPocaSangue(){
+
     }
 
     public void telaCozinha(){
