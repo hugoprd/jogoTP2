@@ -3,6 +3,7 @@ package main;
 import entidade.Item;
 
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class Jogo extends JFrame{
     PainelJogo pj;
 
     PersonagemJogavel protagonista;
-    Autoestima autoestima;
+    public Autoestima autoestima;
 
     // itens dos comodos
     Item pedacoQueijo = new Item("queijo", 5, 1, false); // dentro da geladeira da cozinha
@@ -33,6 +34,24 @@ public class Jogo extends JFrame{
     
     Color corKalrok = Color.decode("#c04849");
     Color corLohan = Color.decode("#480049");
+
+    ActionListener escreverCena1 = e -> {
+        pj.bpigh.escreverFrases(e, protagonista.getNome(), 1);
+        if(pj.bpigh.indiceAtual == 6){
+            //System.out.println("entrou");
+            pj.bpigh.indiceAtual = 0;
+            telaApartamento();
+        }
+    };
+
+    ActionListener escreverCena2 = e -> {
+        pj.bpigh.escreverFrases(e, protagonista.getNome(), 2);
+        if(pj.bpigh.indiceAtual == 12){
+            //System.out.println("entrou");
+            pj.bpigh.indiceAtual = 0;
+            telaSala();
+        }
+    };
 
     public Jogo(PainelJogo pj){
         this.pj = pj;
@@ -516,14 +535,18 @@ public class Jogo extends JFrame{
     }
 
     public void telaComecoJogo(){
-        pj.botaoProximoInGame.addActionListener(e -> {
-            pj.bpigh.escreverFrases(e, protagonista.getNome(), 1);
-        }); // botao proximo handler
+        pj.botaoProximoInGame.addActionListener(escreverCena1); // botao proximo handler
 
         pj.con.repaint();
     }
 
     public void telaApartamento(){
+        ControleMusicaTJ cmtj = new ControleMusicaTJ(pj);
+        pj.clip2.start();
+        pj.clip2.loop(50);
+
+        pj.areaTextoPadrao.setText("");
+
         Comodo apartamento = Comodo.fromNome("apartamento");
         System.out.println("Caminho cena apartamento: " + apartamento.getCaminhoImagem1());
 
@@ -536,6 +559,41 @@ public class Jogo extends JFrame{
         JLabel labelCena = new JLabel(imagemIcon);
         labelCena.setVisible(true);
 
+        pj.painelImagemApartamento = new JPanel();
+
+        pj.painelImagemApartamento.add(labelCena, BorderLayout.CENTER);
+
+        pj.painelImagemComodo.add(pj.painelImagemApartamento, BorderLayout.CENTER);
+
+        pj.painelImagemComodo.revalidate();
+        pj.painelImagemComodo.repaint();
+
+        pj.con.revalidate();
+        pj.con.repaint();
+
+        pj.botaoProximoInGame.removeActionListener(escreverCena1);
+
+        pj.botaoProximoInGame.addActionListener(escreverCena2); // botao proximo handler
+
+        pj.con.repaint();
+    }
+
+    public void telaSala(){
+        pj.areaTextoPadrao.setText("");
+        pj.painelImagemApartamento.setVisible(false);
+
+        Comodo sala = Comodo.fromNome("sala");
+        System.out.println("Caminho cena apartamento: " + sala.getCaminhoImagem1());
+
+        ImageIcon cenaSala = new ImageIcon(getClass().getResource(sala.getCaminhoImagem1()));
+        System.out.println(Comodo.APARTAMENTO.getCaminhoImagem1());
+
+        Image imagem = cenaSala.getImage().getScaledInstance(escalaXY, escalaXY, Image.SCALE_SMOOTH);
+        ImageIcon imagemIcon = new ImageIcon(imagem);
+
+        JLabel labelCena = new JLabel(imagemIcon);
+        labelCena.setVisible(true);
+
         pj.painelImagemComodo.add(labelCena, BorderLayout.CENTER);
 
         pj.painelImagemComodo.revalidate();
@@ -543,10 +601,6 @@ public class Jogo extends JFrame{
 
         pj.con.revalidate();
         pj.con.repaint();
-    }
-
-    public void telaSala(){
-
     }
 
     public void telaCozinha(){

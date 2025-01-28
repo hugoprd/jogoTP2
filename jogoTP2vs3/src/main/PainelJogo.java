@@ -91,10 +91,15 @@ public class PainelJogo {
     BotaoProximoInGameHandler bpigh = new BotaoProximoInGameHandler(this);
 
     public Clip clip, clip2, clipClickSound;
+    public Clip clipSomKalrok, clipSomLohan, clipSomAutoestima, clipSomChefe;
     public FloatControl volumeControl;
 
     ControleMusicaTI cmti = new ControleMusicaTI(this);
-    ControleMusicaTJ cmtj = new ControleMusicaTJ(this);
+    //ControleMusicaTJ cmtj = new ControleMusicaTJ(this);
+
+    // som texto personagens
+    SomKalrokHandler skh = new SomKalrokHandler(this);
+    SomAutoestimaHandler sah = new SomAutoestimaHandler(this);
 
     // TELA JOGO
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -463,8 +468,6 @@ public class PainelJogo {
         painelTituloEscolherPersonagem.setVisible(false);
 
         clip.stop();
-        clip2.start();
-        clip2.loop(50);
 
         jogo.definirPersonagem(nomePersonagem);
         jogo.telaPadraoJogo();
