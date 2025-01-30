@@ -129,14 +129,14 @@ public class BotaoProximoInGameHandler{
             carregarFrases("/lib/cenas/cena3/cena3ComodaLohan.txt");
         }
 
-        System.out.println("tamanho do arraylist das frases: " + frases.size());
+        //System.out.println("tamanho do arraylist das frases: " + frases.size());
 
-        if(indiceAtual < 3){
+        if(indiceAtual < 2){
             pj.areaTextoPadrao.setText(frases.get(indiceAtual));
             //pj.sah.tocarSomTexto();
             pj.con.repaint();
         }
-        else if(indiceAtual == 4){
+        else if(indiceAtual == 3){
             indiceAtual = 0;
         }
         indiceAtual++;

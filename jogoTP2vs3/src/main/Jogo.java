@@ -40,30 +40,19 @@ public class Jogo extends JFrame{
 
     ActionListener escreverCena1 = e -> {
         pj.bpigh.escreverFrases(e, protagonista.getNome(), 1);
-        if(pj.bpigh.indiceAtual == 6){
-            //System.out.println("entrou");
-            pj.bpigh.indiceAtual = 0;
-            telaApartamento();
-        }
+        extraCena(1, 6, false);
     };
 
     ActionListener escreverCena2 = e -> {
         pj.bpigh.escreverFrases(e, protagonista.getNome(), 2);
-        if(pj.bpigh.indiceAtual == 14){
-            //System.out.println("entrou");
-            pj.bpigh.indiceAtual = 0;
-            telaSala();
-        }
+        extraCena(2, 14, false);
     };
 
     ActionListener escreverCena3Comoda2 = e -> {
         pj.botaoProximoInGame.setVisible(true);
         pj.painelEscolharSimNao.setVisible(false);
         pj.bpigh.escreverFrases(e, protagonista.getNome(), 5);
-        if(pj.bpigh.indiceAtual == 8){
-            pj.bpigh.indiceAtual = 0;
-            telaSala();
-        }
+        extraCena(5, 8, comodaVisitada);
     };
 
     ActionListener escreverCena3Comoda3 = e -> {
@@ -72,20 +61,14 @@ public class Jogo extends JFrame{
         telaSala();
     };
 
-    ActionListener escreverCena3Comoda = e -> {
+    ActionListener escreverCena3Comoda = e -> { // clicou pra ver a comoda
         pj.csh.tocarClickSound();
         pj.painelEscolhas.setVisible(false);
-        pj.botaoProximoInGame.setVisible(true);
+        atribuirFuncaoBotao(4);
         pj.bpigh.escreverFrases(e, protagonista.getNome(), 4);
-        if(pj.bpigh.indiceAtual == 4){
-            System.out.println("dentro cena 3 comoda: " + pj.bpigh.indiceAtual);
-            pj.bpigh.indiceAtual = 0;
-            pj.botaoProximoInGame.setVisible(false);
-            pj.painelEscolharSimNao.setVisible(true);
-            pj.escolhaBS.addActionListener(escreverCena3Comoda2);
-            pj.escolhaBN.addActionListener(escreverCena3Comoda3);
-            //pj.areaTextoPadrao.setText("*(e agora?)*");
-        }
+        //int cenaAtual = 4;
+        //System.out.println("cena atual (escreverCena3Comoda): " + cenaAtual);
+        extraCena(4, 3, comodaVisitada);
     };
 
     ActionListener escreverCena3Poltrona = e -> {
@@ -121,23 +104,82 @@ public class Jogo extends JFrame{
 
     ActionListener escreverCena3 = e -> {
         pj.bpigh.escreverFrases(e, protagonista.getNome(), 3);
-        if(pj.bpigh.indiceAtual == 16 || salaVisitado == true){
-            System.out.println("entrou");
-            pj.bpigh.indiceAtual = 0;
-            System.out.println("dentro cena 3: " + pj.bpigh.indiceAtual);
-            pj.botaoProximoInGame.setVisible(false);
-            //pj.botaoProximoInGame.removeActionListener(escreverCena3);
-            //pj.botaoProximoInGame.removeActionListener(escreverCena3);
-            pj.painelEscolhas.setVisible(true);
-            pj.escolha1.addActionListener(escreverCena4);
-            pj.escolha2.addActionListener(escreverCena5);
-            pj.escolha3.addActionListener(escreverCena6);
-            pj.escolha4.addActionListener(escreverCena3Comoda);
-            pj.escolha5.addActionListener(escreverCena3Poltrona);
-            pj.escolha6.addActionListener(escreverCena3Poca);
-            salaVisitado = true;
-        }
+        extraCena(3, 16, salaVisitado);
     };
+
+    public void atribuirFuncaoBotao(int cena){
+        if(cena == 4){ // cena 3: comoda
+            pj.botaoProximoInGame.setVisible(true);
+            pj.botaoProximoInGame.addActionListener(escreverCena3Comoda);
+        }
+    }
+
+    public void extraCena(int cena, int indice, boolean visitado){
+        // para a cena 1: "tela preta"
+        if(cena == 1){
+            System.out.println("indice max do indice atual dentro do extraCena: cena == 1: " + indice);
+            if(pj.bpigh.indiceAtual == indice){
+                //System.out.println("entrou");
+                pj.bpigh.indiceAtual = 0;
+                telaApartamento();
+            }
+        }
+        // para a cena 2: apartamento
+        if(cena == 2){
+            System.out.println("indice max do indice atual dentro do extraCena: cena == 2: " + indice);
+            if(pj.bpigh.indiceAtual == indice){
+                pj.bpigh.indiceAtual = 0;
+                telaSala();
+            }
+        }
+        // para a cena 3: sala
+        if(cena == 3){
+            System.out.println("indice max do indice atual dentro do extraCena: cena == 3: " + indice);
+            System.out.println("boolean bruto se lugar x ja foi visitado: " + visitado);
+            if(pj.bpigh.indiceAtual == indice || visitado){
+                System.out.println("entrou no maximo indice da cena 3");
+                pj.bpigh.indiceAtual = 0;
+                System.out.println("dentro cena 3: " + pj.bpigh.indiceAtual);
+                pj.botaoProximoInGame.setVisible(false);
+                pj.botaoProximoInGame.removeActionListener(escreverCena3);
+                pj.painelEscolhas.setVisible(true);
+                pj.escolha1.addActionListener(escreverCena4);
+                pj.escolha2.addActionListener(escreverCena5);
+                pj.escolha3.addActionListener(escreverCena6);
+                pj.escolha4.addActionListener(escreverCena3Comoda);
+                pj.escolha5.addActionListener(escreverCena3Poltrona);
+                pj.escolha6.addActionListener(escreverCena3Poca);
+                salaVisitado = true;
+            }
+        }
+        // para cena 3: comoda (escolha entre sim e nao)
+        System.out.println("numero bruto da cena: " + cena);
+        if(cena == 4){
+            System.out.println("indice max do indice atual dentro do extraCena: cena == 4 (cena 3 comoda): " + indice);
+            pj.botaoProximoInGame.removeActionListener(escreverCena3Comoda);
+            pj.botaoProximoInGame.addActionListener(escreverCena3Comoda2);
+            pj.botaoProximoInGame.setVisible(true);
+            if(pj.bpigh.indiceAtual == indice || visitado){
+                System.out.println("dentro cena 3 comoda: " + pj.bpigh.indiceAtual);
+                pj.bpigh.indiceAtual = 0;
+                pj.botaoProximoInGame.setVisible(false);
+                pj.painelEscolharSimNao.setVisible(true);
+                pj.escolhaBS.addActionListener(escreverCena3Comoda2);
+                pj.escolhaBN.addActionListener(escreverCena3Comoda3);
+                //pj.areaTextoPadrao.setText("*(e agora?)*");
+                comodaVisitada = true;
+            }
+        }
+        // para cena 3: comoda 2 (botou sim nas opcoes)
+        if(cena == 5){
+            System.out.println("indice max do indice atual dentro do extraCena: cena == 5 (cena 3 comoda 2): " + indice);
+            pj.botaoProximoInGame.addActionListener(escreverCena3Poltrona);
+            if(pj.bpigh.indiceAtual == 8){
+                pj.bpigh.indiceAtual = 0;
+                telaSala();
+            }
+        }
+    }
 
     public Jogo(PainelJogo pj){
         this.pj = pj;
