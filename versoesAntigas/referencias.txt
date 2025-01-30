@@ -1,0 +1,37 @@
+I - https://pt.stackoverflow.com/questions/165302/exibir-texto-em-jframe
+
+II - https://pt.stackoverflow.com/questions/93061/como-mudar-a-fonte-padr%C3%A3o-dos-componentes-swing
+
+III- Som dos textos: https://www.youtube.com/watch?v=B3S9QCCMPRw
+
+IV - Som dos botões: https://pixabay.com/sound-effects/search/8%20bit%20game/
+
+V - https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java
+
+VI - https://stackoverflow.com/questions/18027833/adding-image-to-jframe
+
+VII - https://medium.com/@michael71314/java-lesson-22-inserting-images-onto-the-jframe-a0a0b6540cca
+
+VIII - https://intellij-support.jetbrains.com/hc/en-us/community/posts/360001838939-How-do-I-insert-an-image-in-the-center-of-my-JFrame
+
+IX - https://www.youtube.com/watch?v=sLQOP1DvbXo
+
+X - https://www.youtube.com/watch?v=OJSAnlzXRDk
+
+XI - (link que a senhora mandou): https://medium.com/@franksands/why-is-object-oriented-programming-useful-with-an-rpg-example-javascript-and-java-670e2d1c5505
+
+XII - https://stackoverflow.com/questions/1081486/setting-background-color-for-a-jframe
+
+XIII - https://www-tutorialspoint-com.translate.goog/swingexamples/add_border_to_label.htm?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=pt&_x_tr_pto=tc
+
+XIV - https://www.youtube.com/watch?v=h5d6r4g5p4Y
+
+XV - https://www.youtube.com/watch?v=yO_6DE8DQWo
+
+XVI - https://www.youtube.com/watch?v=Ol9zWkCCAgM
+
+XVII - https://www.youtube.com/watch?v=loIGdB9rK_w
+
+XVIII - https://homepages.dcc.ufmg.br/~fsantos/ECOi06/aulaSwingSWT.pdf
+
+XIX - Música da tela de início: https://pixabay.com/music/search/8bit/
