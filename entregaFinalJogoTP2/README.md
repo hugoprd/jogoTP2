@@ -39,4 +39,4 @@ Foi uma experiência gratificante, por fim, onde desenvolvi bastante meu racioc�
 
 ## REFERÊNCIAS
 
-[Arquivo que contém todas as referências utilizadas para desenvolver o projeto](./jogoTP2/referencias.txt)
+[Arquivo que contém todas as referências utilizadas para desenvolver o projeto](https://github.com/hugoprd/jogoTP2/referencias.txt)
