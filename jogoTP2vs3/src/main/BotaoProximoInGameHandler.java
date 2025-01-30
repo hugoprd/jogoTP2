@@ -121,6 +121,7 @@ public class BotaoProximoInGameHandler{
         if(frases != null){
             frases.clear();
         }
+        System.out.println("tamanho arraylist pos exclusao do passado e pre colocamento de dados da cena 3: comoda: " + frases.size());
 
         if(nome.equals("kalrok")){
             carregarFrases("/lib/cenas/cena3/cena3ComodaKalrok.txt");
@@ -128,6 +129,8 @@ public class BotaoProximoInGameHandler{
         else if(nome.equals("lohan")){
             carregarFrases("/lib/cenas/cena3/cena3ComodaLohan.txt");
         }
+
+        System.out.println("tamanho arraylist pos exclusao do passado e pos colocamento de dados da cena 3: comoda: " + frases.size());
 
         //System.out.println("tamanho do arraylist das frases: " + frases.size());
 

@@ -56,7 +56,7 @@ public class Jogo extends JFrame{
     };
 
     ActionListener escreverCena3Comoda3 = e -> {
-        pj.botaoProximoInGame.setVisible(true);
+        pj.botaoProximoInGame.setVisible(false);
         pj.painelEscolharSimNao.setVisible(false);
         telaSala();
     };
@@ -64,8 +64,11 @@ public class Jogo extends JFrame{
     ActionListener escreverCena3Comoda = e -> { // clicou pra ver a comoda
         pj.csh.tocarClickSound();
         pj.painelEscolhas.setVisible(false);
+        System.out.println("dentro do metodo escrevercena3comoda pre metodo atribuirfuncao");
         atribuirFuncaoBotao(4);
+        System.out.println("dentro do metodo escrevercena3comoda pos metodo atribuirfuncao");
         pj.bpigh.escreverFrases(e, protagonista.getNome(), 4);
+        System.out.println("dentro do metodo escrevercena3comoda pos metodo escreverfrase");
         //int cenaAtual = 4;
         //System.out.println("cena atual (escreverCena3Comoda): " + cenaAtual);
         extraCena(4, 3, comodaVisitada);
@@ -108,7 +111,9 @@ public class Jogo extends JFrame{
     };
 
     public void atribuirFuncaoBotao(int cena){
+        System.out.println("indice cena bruto no metodo atribuirfuncaobotao: " + cena);
         if(cena == 4){ // cena 3: comoda
+            System.out.println("metodo atribuir funcao botao: cena 3: comoda");
             pj.botaoProximoInGame.setVisible(true);
             pj.botaoProximoInGame.addActionListener(escreverCena3Comoda);
         }
@@ -117,6 +122,7 @@ public class Jogo extends JFrame{
     public void extraCena(int cena, int indice, boolean visitado){
         // para a cena 1: "tela preta"
         if(cena == 1){
+            System.out.println("numero bruto da cena: " + cena);
             System.out.println("indice max do indice atual dentro do extraCena: cena == 1: " + indice);
             if(pj.bpigh.indiceAtual == indice){
                 //System.out.println("entrou");
@@ -125,7 +131,8 @@ public class Jogo extends JFrame{
             }
         }
         // para a cena 2: apartamento
-        if(cena == 2){
+        else if(cena == 2){
+            System.out.println("numero bruto da cena: " + cena);
             System.out.println("indice max do indice atual dentro do extraCena: cena == 2: " + indice);
             if(pj.bpigh.indiceAtual == indice){
                 pj.bpigh.indiceAtual = 0;
@@ -133,9 +140,10 @@ public class Jogo extends JFrame{
             }
         }
         // para a cena 3: sala
-        if(cena == 3){
+        else if(cena == 3){
+            System.out.println("numero bruto da cena: " + cena);
             System.out.println("indice max do indice atual dentro do extraCena: cena == 3: " + indice);
-            System.out.println("boolean bruto se lugar x ja foi visitado: " + visitado);
+            System.out.println("boolean bruto se cena " + cena + "ja foi visitado: " + visitado);
             if(pj.bpigh.indiceAtual == indice || visitado){
                 System.out.println("entrou no maximo indice da cena 3");
                 pj.bpigh.indiceAtual = 0;
@@ -153,8 +161,8 @@ public class Jogo extends JFrame{
             }
         }
         // para cena 3: comoda (escolha entre sim e nao)
-        System.out.println("numero bruto da cena: " + cena);
-        if(cena == 4){
+        else if(cena == 4){
+            System.out.println("numero bruto da cena: " + cena);
             System.out.println("indice max do indice atual dentro do extraCena: cena == 4 (cena 3 comoda): " + indice);
             pj.botaoProximoInGame.removeActionListener(escreverCena3Comoda);
             pj.botaoProximoInGame.addActionListener(escreverCena3Comoda2);
@@ -171,7 +179,8 @@ public class Jogo extends JFrame{
             }
         }
         // para cena 3: comoda 2 (botou sim nas opcoes)
-        if(cena == 5){
+        else if(cena == 5){
+            System.out.println("numero bruto da cena: " + cena);
             System.out.println("indice max do indice atual dentro do extraCena: cena == 5 (cena 3 comoda 2): " + indice);
             pj.botaoProximoInGame.addActionListener(escreverCena3Poltrona);
             if(pj.bpigh.indiceAtual == 8){
